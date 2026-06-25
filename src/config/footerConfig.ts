@@ -1,8 +1,10 @@
 import type { FooterConfig } from "../types/footerConfig";
 
 export const footerConfig: FooterConfig = {
-	// 是否启用Footer HTML注入功能
-	enable: false,
+  // Enable Footer HTML injection
+  enable: false,
 };
 
-// 直接编辑 config/FooterConfig.html 文件来添加备案号等自定义内容
+// Edit the config/FooterConfig.html file directly
+// to add custom content such as copyright notices,
+// registration numbers, legal information, or other footer elements.

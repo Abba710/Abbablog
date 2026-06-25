@@ -1,42 +1,81 @@
 import type { GalleryConfig } from "@/types/galleryConfig";
 
-// 相册配置
+// Gallery Configuration
 export const galleryConfig: GalleryConfig = {
-	// 相册列表
-	albums: [
-		// 支持jpg/png/webp/avif/gif格式
-		// id: 相册唯一标识符（用于目录命名和URL路径），比如设置：id: "firefly-2026", 对应 public/gallery/firefly-2026/目录
-		// cover: 手动指定封面图（可选，不填会把cover.*文件作为封面图，如果没有cover.*文件，则使用第一张图片作为封面图）
-		// name: 相册名称
-		// description: 相册描述
-		// location: 相册拍摄地点
-		// date: 相册日期，格式为 YYYY-MM-DD，用于排序和显示
-		// tags: 相册标签，用于分类和过滤
-		// password: 访问密码，设置后需要输入密码才能查看相册内容（可选）
-		// passwordHint: 密码提示，设置后在输入密码错误时显示（可选，需配合password使用）
-		// 每添加一个数组项就相当于添加了一个相册，记得在 public/gallery/ 目录下创建对应的子目录并放入图片
-		{
-			id: "firefly-2026",
-			name: "可爱流萤",
-			description: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
-			location: "崩坏：星穹铁道",
-			date: "2026-01-01",
-			tags: ["崩坏星穹铁道", "流萤"],
-		},
-		{
-			id: "encrypted-test",
-			name: "加密相册示例",
-			description:
-				"这是一个加密相册的示例，设置了访问密码，只有输入正确的密码才能查看相册内容。",
-			location: "崩坏：星穹铁道",
-			date: "2026-02-01",
-			tags: ["加密相册", "示例"],
-			password: "123456",
-			passwordHint: "示例密码123456",
-		},
-	],
+  // Album list
+  albums: [
+    // Supported formats: jpg, png, webp, avif, gif
+    //
+    // id:
+    // Unique album identifier used for folder names and URL paths.
+    // Example: id: "firefly-2026"
+    // Corresponding directory:
+    // public/gallery/firefly-2026/
+    //
+    // cover:
+    // Manually specify a cover image (optional).
+    // If omitted, the system will use:
+    // 1. cover.* file if available
+    // 2. otherwise the first image in the album
+    //
+    // name:
+    // Album name
+    //
+    // description:
+    // Album description
+    //
+    // location:
+    // Photo location
+    //
+    // date:
+    // Album date in YYYY-MM-DD format.
+    // Used for sorting and display.
+    //
+    // tags:
+    // Album tags used for filtering and categorization.
+    //
+    // password:
+    // Optional access password.
+    // Users must enter the correct password to view the album.
+    //
+    // passwordHint:
+    // Optional password hint.
+    // Displayed when an incorrect password is entered.
+    // Requires `password` to be set.
+    //
+    // Each item in this array represents a gallery album.
+    // Remember to create the corresponding folder inside
+    // public/gallery/ and place the images there.
 
-	// 瀑布流最小列宽(px)，浏览器根据容器宽度自动计算列数，默认 240
-	// 值越小列数越多，值越大列数越少
-	columnWidth: 240,
+    {
+      id: "firefly-2026",
+      name: "Cute Firefly",
+      description:
+        "A firefly's light shines through the endless night, blooming into the tomorrow that awaits.",
+      location: "Honkai: Star Rail",
+      date: "2026-01-01",
+      tags: ["Honkai: Star Rail", "Firefly"],
+    },
+
+    {
+      id: "encrypted-test",
+      name: "Protected Album Example",
+      description:
+        "This is an example of a password protected album. Only users who enter the correct password can view its contents.",
+      location: "Honkai: Star Rail",
+      date: "2026-02-01",
+      tags: ["Protected Album", "Example"],
+      password: "123456",
+      passwordHint: "Example password: 123456",
+    },
+  ],
+
+  // Minimum waterfall grid column width (px).
+  // The browser automatically calculates the number of columns
+  // based on the container width.
+  //
+  // Default: 240
+  // Smaller value = more columns
+  // Larger value = fewer columns
+  columnWidth: 240,
 };

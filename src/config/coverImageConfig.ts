@@ -1,36 +1,47 @@
 import type { CoverImageConfig } from "../types/coverImageConfig";
 
 /**
- * 文章封面图配置
+ * Article Cover Image Configuration
  *
- * enableInPost - 是否在文章详情页显示封面图
+ * enableInPost:
+ * Controls whether cover images are displayed on article detail pages.
  *
- * 随机封面图使用说明：
- * 1. 在文章的 Frontmatter 中添加 image: "api" 即可使用随机图功能
- * 2. 系统会依次尝试所有配置的 API，全部失败后使用备用图片
+ * Random Cover Image Usage:
  *
- * // 文章 Frontmatter 示例：
+ * 1. Add `image: "api"` to an article's frontmatter to enable
+ *    random cover image generation.
+ *
+ * 2. The system will try each configured API in order.
+ *    If all APIs fail, the fallback image will be used.
+ *
+ * Frontmatter Example:
+ *
  * ---
- * title: 文章标题
+ * title: Article Title
  * image: "api"
  * ---
  */
 export const coverImageConfig: CoverImageConfig = {
-	// 是否在文章详情页显示封面图
-	enableInPost: true,
+  // Display cover image on article pages
+  enableInPost: true,
 
-	randomCoverImage: {
-		// 随机封面图功能开关
-		enable: false,
-		// 封面图API列表
-		apis: [
-			"https://t.alcy.cc/pc",
-			"https://www.dmoe.cc/random.php",
-			"https://uapis.cn/api/v1/random/image?category=acg&type=pc",
-		],
-		// API失败时的回退图片路径（相对于src目录或以/开头的public目录路径）
-		fallback: "assets/images/cover.avif",
-		// 是否显示加载动画
-		showLoading: false,
-	},
+  randomCoverImage: {
+    // Enable random cover image feature
+    enable: false,
+
+    // Random image API endpoints
+    apis: [
+      "https://t.alcy.cc/pc",
+      "https://www.dmoe.cc/random.php",
+      "https://uapis.cn/api/v1/random/image?category=acg&type=pc",
+    ],
+
+    // Fallback image path used if all APIs fail
+    // Can be a path relative to the src directory
+    // or a path inside the public directory starting with "/"
+    fallback: "assets/images/cover.avif",
+
+    // Show loading animation while fetching images
+    showLoading: false,
+  },
 };

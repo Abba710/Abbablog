@@ -77,7 +77,8 @@ const tLoadError = i18n(I18nKey.videoLoadError);
 
 		if (!video) return;
 
-		// 防止 is:inline 脚本重复注册监听器（Swup 导航会重新执行脚本）
+		// Prevent duplicate listener registration for is:inline script
+		// Swup navigation re executes scripts on page change
 		if (video.getAttribute("data-player-init")) return;
 		video.setAttribute("data-player-init", "true");
 
@@ -99,11 +100,15 @@ const tLoadError = i18n(I18nKey.videoLoadError);
 
 		function pickIndex(except) {
 			if (urlList.length <= 1) return 0;
+
 			if (playerMode === "random") {
 				var n;
-				do { n = Math.floor(Math.random() * urlList.length); } while (n === except);
+				do {
+					n = Math.floor(Math.random() * urlList.length);
+				} while (n === except);
 				return n;
 			}
+
 			return (except + 1) % urlList.length;
 		}
 
@@ -121,15 +126,26 @@ const tLoadError = i18n(I18nKey.videoLoadError);
 
 		function doPlay() {
 			video.src = urlList[currentIndex];
+			video.loop = true;
 			video.muted = true;
+
 			video.play()
-				.then(function () { setTimeout(function () { if (video) video.muted = false; }, 100); })
-				.catch(function () { isPlaying = false; syncAttr(); });
+				.then(function () {
+					setTimeout(function () {
+						if (video) video.muted = false;
+					}, 100);
+				})
+				.catch(function () {
+					isPlaying = false;
+					syncAttr();
+				});
 		}
 
 		function switchTrack(index) {
 			if (index < 0 || index >= urlList.length) return;
+
 			currentIndex = index;
+
 			if (isPlaying) {
 				doPlay();
 			} else {
@@ -140,14 +156,27 @@ const tLoadError = i18n(I18nKey.videoLoadError);
 
 		function toggle() {
 			isPlaying = !isPlaying;
+
 			if (isPlaying) {
 				if (currentIndex >= urlList.length) currentIndex = 0;
 				syncAttr();
-				if (overlay) { overlay.classList.remove("opacity-0"); overlay.classList.add("opacity-100"); }
-				requestAnimationFrame(function () { doPlay(); });
+
+				if (overlay) {
+					overlay.classList.remove("opacity-0");
+					overlay.classList.add("opacity-100");
+				}
+
+				requestAnimationFrame(function () {
+					doPlay();
+				});
 			} else {
 				video.pause();
-				if (overlay) { overlay.classList.remove("opacity-100"); overlay.classList.add("opacity-0"); }
+
+				if (overlay) {
+					overlay.classList.remove("opacity-100");
+					overlay.classList.add("opacity-0");
+				}
+
 				syncAttr();
 			}
 		}
@@ -158,59 +187,86 @@ const tLoadError = i18n(I18nKey.videoLoadError);
 				doPlay();
 			} else {
 				isPlaying = false;
-				if (overlay) { overlay.classList.remove("opacity-100"); overlay.classList.add("opacity-0"); }
+
+				if (overlay) {
+					overlay.classList.remove("opacity-100");
+					overlay.classList.add("opacity-0");
+				}
+
 				syncAttr();
 			}
 		}
 
 		function onError() {
 			errorCount++;
+
 			if (isMultiple && errorCount < urlList.length) {
-				// 多视频模式下自动尝试下一个
+				// In multi video mode, automatically try next video
 				currentIndex = pickIndex(currentIndex);
 				video.src = urlList[currentIndex];
 				video.load();
 			} else {
-				// 所有视频都失败或只有单个视频
+				// All videos failed or single video mode
 				isPlaying = false;
-				if (overlay) { overlay.classList.remove("opacity-100"); overlay.classList.add("opacity-0"); }
+
+				if (overlay) {
+					overlay.classList.remove("opacity-100");
+					overlay.classList.add("opacity-0");
+				}
+
 				syncAttr();
 				showToast();
 			}
 		}
 
-		// 监听导航栏播放按钮事件
+		// Listen to global toggle event from navbar button
 		window.addEventListener("bg-player-toggle", toggle);
+
 		video.addEventListener("ended", onEnded);
 		video.addEventListener("error", onError);
-		// 播放成功时重置错误计数
-		video.addEventListener("playing", function () { errorCount = 0; });
-		if (prevBtn) prevBtn.addEventListener("click", function () { switchTrack(prevIndex()); });
-		if (nextBtn) nextBtn.addEventListener("click", function () { switchTrack(pickIndex(currentIndex)); });
 
-		// 切换壁纸模式时停止播放
+		// Reset error counter on successful playback
+		video.addEventListener("playing", function () {
+			errorCount = 0;
+		});
+
+		if (prevBtn) prevBtn.addEventListener("click", function () {
+			switchTrack(prevIndex());
+		});
+
+		if (nextBtn) nextBtn.addEventListener("click", function () {
+			switchTrack(pickIndex(currentIndex));
+		});
+
+		// Stop playback when wallpaper mode changes to none
 		window.addEventListener("wallpaperModeChange", function (e) {
 			if (e.detail && e.detail.mode === "none" && isPlaying) {
 				isPlaying = false;
 				video.pause();
-				if (overlay) { overlay.classList.remove("opacity-100"); overlay.classList.add("opacity-0"); }
+
+				if (overlay) {
+					overlay.classList.remove("opacity-100");
+					overlay.classList.add("opacity-0");
+				}
+
 				syncAttr();
 			}
 		});
 
-		// 动态控制 prev/next 按钮显示
+		// Hide prev next buttons if only one video
 		if (!isMultiple) {
 			if (prevBtn) prevBtn.style.display = "none";
 			if (nextBtn) nextBtn.style.display = "none";
 		}
 
 		function cleanup() {
-			// 视频仍在播放时保留属性，供 Navbar 同步按钮状态
+			// Keep attributes if video is still playing so navbar can sync state
 			if (!isPlaying) {
 				document.body.removeAttribute("data-bg-video-playing");
 				document.documentElement.removeAttribute("data-bg-video-playing");
 			}
 		}
+
 		document.addEventListener("astro:before-swap", cleanup);
 	})();
 </script>

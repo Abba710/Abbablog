@@ -1,113 +1,166 @@
 /**
- * 字体配置（统一入口）
+ * Font Configuration (Centralized Entry Point)
  *
- * 所有字体相关配置都在此文件中定义：
- *   详细用法请参考 Astro 官方文档：https://docs.astro.build/en/guides/fonts
- * - fonts：Astro Font API 字体定义（自动下载、缓存、优化加载）
- * - fontConfig：字体选择与区域覆盖
+ * All font related settings are defined in this file.
  *
- * 添加新字体只需编辑本文件：
- * 1. 在下方 fonts 数组中添加字体定义
- * 2. 在 fontConfig.selected 或区域字段中引用对应的 cssVariable
+ * For detailed usage, see the Astro documentation:
+ * https://docs.astro.build/en/guides/fonts
  *
- * 支持的 provider：https://docs.astro.build/en/reference/font-provider-reference/#built-in-providers
+ * - fonts:
+ *   Astro Font API font definitions
+ *   (automatic download, caching, and optimized loading)
+ *
+ * - fontConfig:
+ *   Font selection and region specific overrides
+ *
+ * To add a new font:
+ *
+ * 1. Add a font definition to the `fontsList` array below.
+ * 2. Reference its `cssVariable` in `fontConfig.selected`
+ *    or one of the region specific font settings.
+ *
+ * Supported providers:
+ * https://docs.astro.build/en/reference/font-provider-reference/#built-in-providers
+ *
  *   "google"     - Google Fonts
  *   "fontsource" - Fontsource
- *   "local"      - 本地字体文件
+ *   "local"      - Local font files
  *   "bunny"      - Bunny Fonts
  *   "fontshare"  - Fontshare
- *   "npm"        - NPM 包（如 @fontsource/*）
+ *   "npm"        - NPM packages (such as @fontsource/*)
  *
- * 本地字体子集化：在 fontConfig.subsetFonts 中添加对应 cssVariable 的配置，
- * 构建时脚本会自动扫描页面字符并生成轻量 woff2 子集。
+ * Local font subsetting:
+ * Add configuration for the corresponding cssVariable
+ * in `fontConfig.subsetFonts`.
+ *
+ * During the build process, the subsetting script will
+ * automatically scan page content and generate lightweight
+ * WOFF2 subsets containing only the required characters.
  */
+
 import type { FontDefinition, FontSelectionConfig } from "@/types/fontConfig";
 
-// ─── Astro Font API 字体定义 ───────────────────────────────
-// 适用于 Astro Font API 的字体配置，支持自动下载、缓存和优化加载
-// 本地开发调试的情况下，修改后需要每次重启开发服务器才能生效
+// ─── Astro Font API Font Definitions ─────────────────────────────
+//
+// Font configuration used by the Astro Font API.
+// Supports automatic downloading, caching, and optimized loading.
+//
+// Note:
+// When developing locally, changes require restarting
+// the development server to take effect.
+//
 export const fontsList: FontDefinition[] = [
-	{
-		name: "Zen Maru Gothic",
-		cssVariable: "--font-zen-maru-gothic",
-		provider: "fontsource",
-		weights: ["300", "400", "500", "600", "700"],
-		styles: ["normal"],
-		subsets: ["latin", "cyrillic"],
-		fallbacks: ["sans-serif"],
-	},
-	{
-		name: "Inter",
-		cssVariable: "--font-inter",
-		provider: "fontsource",
-		weights: ["300", "400", "500", "600", "700"],
-		styles: ["normal"],
-		subsets: ["latin", "cyrillic"],
-		fallbacks: ["sans-serif"],
-	},
-	{
-		name: "JetBrains Mono",
-		cssVariable: "--font-jetbrains-mono",
-		provider: "fontsource",
-		weights: ["400", "700"],
-		styles: ["normal"],
-		subsets: ["latin", "cyrillic"],
-		fallbacks: [
-			"ui-monospace",
-			"SFMono-Regular",
-			"Menlo",
-			"Monaco",
-			"Consolas",
-			"Liberation Mono",
-			"Courier New",
-			"monospace",
-		],
-	},
-	// ─── 本地字体示例 ───
-	// 使用步骤：
-	// 1. 将 TTF/OTF/WOFF2 字体文件放在 public/assets/fonts/ 目录下
-	// 2. 参考下方配置填写正确的字体信息
-	// 3. 在 fontConfig.selected 或区域字段中引用 cssVariable
-	{
-		name: "GreatVibes Regular 2",
-		cssVariable: "--font-greatvibes",
-		provider: "local",
-		options: {
-			variants: [
-				{
-					src: ["./public/assets/fonts/GreatVibes-Regular-2.otf"],
-				},
-			],
-		},
-		fallbacks: ["sans-serif"],
-	},
+  {
+    name: "Zen Maru Gothic",
+    cssVariable: "--font-zen-maru-gothic",
+    provider: "fontsource",
+    weights: ["300", "400", "500", "600", "700"],
+    styles: ["normal"],
+    subsets: ["latin", "cyrillic"],
+    fallbacks: ["sans-serif"],
+  },
+  {
+    name: "Inter",
+    cssVariable: "--font-inter",
+    provider: "fontsource",
+    weights: ["300", "400", "500", "600", "700"],
+    styles: ["normal"],
+    subsets: ["latin", "cyrillic"],
+    fallbacks: ["sans-serif"],
+  },
+  {
+    name: "JetBrains Mono",
+    cssVariable: "--font-jetbrains-mono",
+    provider: "fontsource",
+    weights: ["400", "700"],
+    styles: ["normal"],
+    subsets: ["latin", "cyrillic"],
+    fallbacks: [
+      "ui-monospace",
+      "SFMono-Regular",
+      "Menlo",
+      "Monaco",
+      "Consolas",
+      "Liberation Mono",
+      "Courier New",
+      "monospace",
+    ],
+  },
+
+  // ─── Local Font Example ─────────────────────────────
+  //
+  // Setup steps:
+  //
+  // 1. Place your TTF, OTF, or WOFF2 font files in:
+  //    public/assets/fonts/
+  //
+  // 2. Configure the font information below.
+  //
+  // 3. Reference the cssVariable in
+  //    fontConfig.selected or one of the region settings.
+  //
+  {
+    name: "GreatVibes Regular 2",
+    cssVariable: "--font-greatvibes",
+    provider: "local",
+    options: {
+      variants: [
+        {
+          src: ["./public/assets/fonts/GreatVibes-Regular-2.otf"],
+        },
+      ],
+    },
+    fallbacks: ["sans-serif"],
+  },
 ];
 
-// ─── 字体选择与区域覆盖 ─────────────────────────────────────
+// ─── Font Selection & Region Overrides ──────────────────────────
+
 export const fontConfig: FontSelectionConfig = {
-	// 是否启用自定义字体功能
-	enable: true,
-	// 当前选择的字体 CSS 变量名（对应上方 fonts 中的 cssVariable）
-	// 使用 "system" 表示系统字体（不加载任何自定义字体）
-	selected: ["system"],
+  // Enable custom font support
+  enable: true,
 
-	// 各区域独立字体设置（填写上方 fonts 中的 cssVariable，留空则使用全局 selected 字体）
-	// 例如：bannerTitleFont: "--font-inter", 表示主页横幅主标题使用 Inter 字体
-	// 主页横幅主标题字体
-	bannerTitleFont: "--font-zen-maru-gothic",
-	// 主页横幅副标题字体
-	bannerSubtitleFont: "--font-inter",
-	// 导航栏标题字体
-	navbarTitleFont: "",
-	// 代码块字体（用于代码高亮和等宽字体场景）
-	codeFont: "--font-jetbrains-mono",
+  // Currently selected font CSS variable(s)
+  // Must match a cssVariable defined above.
+  //
+  // Use "system" to use the system font stack
+  // without loading any custom fonts.
+  selected: ["system"],
 
-	// 本地字体子集化配置（构建时由 scripts/subset-fonts.ts 处理）
-	// key 为 fonts 数组中对应的 cssVariable，value 为子集化选项
-	subsetFonts: {
-		"--font-greatvibes": {
-			// 额外包含的字符
-			extraChars: "",
-		},
-	},
+  // Region specific font overrides.
+  //
+  // Use a cssVariable defined in fontsList.
+  // Leave empty to use the global selected font.
+  //
+  // Example:
+  // bannerTitleFont: "--font-inter"
+  // Uses Inter for the homepage banner title.
+
+  // Homepage banner title font
+  bannerTitleFont: "--font-zen-maru-gothic",
+
+  // Homepage banner subtitle font
+  bannerSubtitleFont: "--font-inter",
+
+  // Navigation bar title font
+  navbarTitleFont: "",
+
+  // Code block font
+  // Used for syntax highlighting and monospaced content
+  codeFont: "--font-jetbrains-mono",
+
+  // Local font subsetting configuration
+  // Processed by scripts/subset-fonts.ts during build
+  //
+  // Key:
+  // Corresponding cssVariable from fontsList
+  //
+  // Value:
+  // Font subsetting options
+  subsetFonts: {
+    "--font-greatvibes": {
+      // Additional characters to include
+      extraChars: "",
+    },
+  },
 };
