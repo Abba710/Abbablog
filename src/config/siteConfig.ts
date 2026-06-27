@@ -44,7 +44,7 @@ export const siteConfig: SiteConfig = {
     fixed: false,
 
     // Default mode: "light", "dark", or "system"
-    defaultMode: "system",
+    defaultMode: "dark",
   },
 
   // Overall page width (rem)
@@ -106,7 +106,7 @@ export const siteConfig: SiteConfig = {
   },
 
   // Site launch date used for uptime/day counter
-  siteStartDate: "2025-01-01",
+  siteStartDate: "2025-09-01",
 
   // Site timezone (IANA timezone string)
   // Used for formatting dates in RSS, Bangumi, etc.

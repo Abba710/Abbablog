@@ -1,29 +1,40 @@
-# 关于我 / About Me
+# 👋 About Me
 
-你好！我是 **夏叶** ，一个在数字世界中默默无闻的一片叶子。
+Hi! I'm **Abba**, an indie hacker who loves turning ideas into real products.
 
-## 🛠️ 关于本站
+This blog is my little corner of the internet where I write about **indie hacking**, **software development**, and **life**. Some posts dive into code, others into building startups, shipping products, staying motivated, or simply figuring things out one step at a time.
 
-这个网站使用 **Astro** 框架构建，采用了 [Firefly](https://github.com/CuteLeaf/Firefly) 模板，Firefly 是基于 [Fuwari](https://github.com/saicaca/fuwari) 的二次开发。
+I believe the best way to learn is by building. Every project teaches something new, whether it's a technical challenge, a business lesson, or a personal one. Here I document that journey, sharing both successes and mistakes along the way.
 
-**Firefly** 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
+## 🚀 Tech Stack
 
+### Frontend
 
-**🖥️在线预览： [Firefly - Demo site](https://firefly.cuteleaf.cn/)**
+* React
+* React Native
+* Astro
+* TypeScript
+* JavaScript
+* CSS
+* Tailwind CSS
 
-**🏠我的博客： [https://blog.cuteleaf.cn](https://blog.cuteleaf.cn/)**
+### Backend
 
-**📝Firefly使用文档： [https://docs-firefly.cuteleaf.cn](https://docs-firefly.cuteleaf.cn/)**
+* Supabase
+* PostgreSQL
+* Deno
 
-**⭐Firefly开源地址：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)** 
+## ✍️ What I Write About
 
-**⭐Fuwari开源地址：[https://github.com/saicaca/fuwari](https://github.com/saicaca/fuwari)**
+* 🚀 Indie hacking and building profitable products
+* 💻 Modern web development
+* ⚡ React, Astro, TypeScript, and full stack engineering
+* 📦 SaaS, startups, and product launches
+* 🧠 Productivity, learning, and continuous improvement
+* 🌱 Thoughts on life, personal growth, and the challenges of creating things from scratch
 
-::github{repo="CuteLeaf/Firefly"}
+## 🎯 Current Mission
 
-::github{repo="saicaca/fuwari"}
+Right now I'm focused on building products that solve real problems and sharing everything I learn along the way. Whether you're a developer, founder, or simply curious about creating things on the internet, I hope you'll find something useful here.
 
----
-
-*感谢你的来访！希望在这里能找到对你有用的内容！*
-
+Thanks for stopping by. Grab a coffee, explore a few posts, and enjoy the journey with me.

@@ -15,7 +15,7 @@ export const profileConfig: ProfileConfig = {
   name: "Abba",
 
   // Short bio
-  bio: "🚀 Ascending to digital divinity | Astro, React, TypeScript, React Native, Supabase | Full-stack Architect & AI Enthusiast",
+  bio: "🚀 Ascending to digital divinity | Astro, React, TypeScript, React Native, Deno, Supabase | Full-stack Architect & AI Enthusiast",
 
   // Social links
   // Preinstalled icon sets:

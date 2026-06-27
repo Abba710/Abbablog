@@ -1,160 +1,169 @@
-# 📦 Components 组件目录
+# 📦 Components Directory
 
-Firefly 项目中所有可复用组件的集中管理。组件按照功能和职责进行分类，提供清晰的架构和易于维护的代码组织。
+A centralized collection of all reusable components used in the Firefly project. Components are organized by purpose and responsibility to provide a clear architecture and maintainable codebase.
 
-## 📁 目录结构
+## 📁 Directory Structure
 
-### 🏗️ layout/ - 页面布局组件
+### 🏗️ layout/ - Page Layout Components
 
-负责整体页面框架和布局结构的组件。
+Components responsible for the overall page structure and layout.
 
-- `CategoryBar.astro` - 分类栏组件
-- `ConfigCarrier.astro` - 配置载体组件
-- `DropdownMenu.astro` - 下拉菜单组件
-- `Footer.astro` - 页脚组件
-- `Navbar.astro` - 导航栏组件
-- `NavMenuPanel.astro` - 导航菜单面板
-- `PostCard.astro` - 文章卡片组件
-- `PostMeta.astro` - 文章元数据组件
-- `PostPage.astro` - 文章页面布局组件
-- `SideBar.astro` - 侧边栏组件
+* `CategoryBar.astro` - Category bar
+* `ConfigCarrier.astro` - Configuration provider
+* `DropdownMenu.astro` - Dropdown menu
+* `Footer.astro` - Footer
+* `Navbar.astro` - Navigation bar
+* `NavMenuPanel.astro` - Navigation menu panel
+* `PostCard.astro` - Post card
+* `PostMeta.astro` - Post metadata
+* `PostPage.astro` - Post page layout
+* `SideBar.astro` - Sidebar
 
-### 🎮 controls/ - 导航和交互控件
+### 🎮 controls/ - Navigation & Interaction Controls
 
-页面导航和用户交互功能组件。
+Components for page navigation and user interaction.
 
-**导航控件**
-- `BackToComment.astro` - 返回评论区按钮
-- `BackToHome.astro` - 返回主页按钮
-- `BackToTop.astro` - 返回顶部按钮
-- `FloatingControls.astro` - 右下角悬浮控件容器
-- `FloatingTOC.astro` - 浮动目录组件
-- `ScrollDownIndicator.astro` - 向下滚动指示器
+**Navigation Controls**
 
-**交互组件**
-- `ArchivePanel.svelte` - 归档面板组件
-- `DisplaySettings.svelte` - 显示设置组件
-- `DisplaySettingsIntegrated.svelte` - 集成显示设置组件
-- `LayoutSwitchButton.svelte` - 布局切换按钮
-- `LightDarkSwitch.svelte` - 主题切换组件
-- `Search.svelte` - 搜索功能组件
-- `WallpaperSwitch.svelte` - 壁纸模式切换组件
+* `BackToComment.astro` - Back to comments button
+* `BackToHome.astro` - Back to home button
+* `BackToTop.astro` - Back to top button
+* `FloatingControls.astro` - Floating controls container
+* `FloatingTOC.astro` - Floating table of contents
+* `ScrollDownIndicator.astro` - Scroll down indicator
 
-### 🔧 common/ - 公共可复用组件
+**Interactive Components**
 
-通用的 UI 组件和工具组件，支持跨项目复用。
+* `ArchivePanel.svelte` - Archive panel
+* `DisplaySettings.svelte` - Display settings
+* `DisplaySettingsIntegrated.svelte` - Integrated display settings
+* `LayoutSwitchButton.svelte` - Layout switch button
+* `LightDarkSwitch.svelte` - Theme switch
+* `Search.svelte` - Search component
+* `WallpaperSwitch.svelte` - Wallpaper mode switch
 
-**基础 UI 组件**
-- `ButtonLink.astro` - 链接按钮
-- `ButtonTag.astro` - 标签按钮
-- `DropdownItem.astro` / `.svelte` - 下拉选项
-- `DropdownPanel.astro` / `.svelte` - 下拉面板容器
-- `FloatingButton.astro` - 悬浮按钮基础组件
-- `Icon.svelte` - 图标组件（带加载状态和错误处理）
-- `WidgetLayout.astro` - 小部件布局容器
+### 🔧 common/ - Shared Reusable Components
 
-**内容和展示组件**
-- `CoverImage.astro` - 封面图组件（支持本地图片和随机图API）
-- `ImageWrapper.astro` - 图片包装器（支持本地和远程图片）
-- `Markdown.astro` - Markdown 内容样式包装器
-- `PioMessageBox.astro` - 消息框组件（Live2D/Spine 消息显示）
+General UI and utility components that can be reused across multiple projects.
 
-**分页组件**
-- `ClientPagination.svelte` - 客户端分页（JavaScript 控制）
-- `Pagination.astro` - 静态路由分页（Astro 原生）
+**Core UI Components**
 
-### 🧩 widget/ - 小部件
+* `ButtonLink.astro` - Link button
+* `ButtonTag.astro` - Tag button
+* `DropdownItem.astro` / `.svelte` - Dropdown item
+* `DropdownPanel.astro` / `.svelte` - Dropdown panel container
+* `FloatingButton.astro` - Base floating button
+* `Icon.svelte` - Icon component with loading state and error handling
+* `WidgetLayout.astro` - Widget layout container
 
-侧边栏中使用的各种功能小部件。
+**Content & Display Components**
 
-- `Advertisement.astro` - 广告组件
-- `Announcement.astro` - 公告组件
-- `Calendar.astro` - 日历组件
-- `Categories.astro` - 分类组件
-- `Music.astro` - 音乐播放器小部件
-- `Profile.astro` - 个人信息/社交链接小部件
-- `SidebarTOC.astro` - 侧边栏目录组件
-- `SiteInfo.astro` - 站点信息组件
-- `SiteStats.astro` - 站点统计组件
-- `SpineModel.astro` - Spine 看板娘组件
-- `Tags.astro` - 标签组件
+* `CoverImage.astro` - Cover image component with support for local images and random image APIs
+* `ImageWrapper.astro` - Image wrapper supporting both local and remote images
+* `Markdown.astro` - Markdown content wrapper
+* `PioMessageBox.astro` - Message box for Live2D and Spine characters
 
-### ✨ features/ - 全局功能特效组件
+**Pagination Components**
 
-全局加载的功能增强和特效组件。
+* `ClientPagination.svelte` - Client side pagination powered by JavaScript
+* `Pagination.astro` - Static route pagination using Astro
 
-**管理器（初始化和管理功能）**
-- `FancyboxManager.astro` - Fancybox 图片查看器管理
-- `FontSetup.astro` - 字体加载和管理（基于 Astro Font API）
-- `KatexManager.astro` - Katex 数学公式渲染管理
-- `MusicManager.astro` - 全局音乐播放管理器（单例，管理唯一 audio 元素和播放状态，通过 CustomEvent 同步所有 MusicPlayer 视图实例）
+### 🧩 widget/ - Sidebar Widgets
 
-**功能组件**
-- `EncryptedContent.astro` - 加密内容组件
-- `EncryptedPost.astro` - 加密文章组件
-- `Live2DWidget.astro` - Live2D 看板娘组件
-- `MusicPlayer.astro` - 音乐播放器 UI 视图控制器（纯 UI，委托 MusicManager 进行播放控制）
-- `SakuraEffect.astro` - 樱花飘落特效
-- `SpineModel.astro` - Spine 看板娘组件
-- `TypewriterText.astro` - 打字机动画效果
+Feature widgets displayed in the sidebar.
 
-### 📃 pages/ - 页面特定组件
+* `Advertisement.astro` - Advertisement widget
+* `Announcement.astro` - Announcement widget
+* `Calendar.astro` - Calendar widget
+* `Categories.astro` - Categories widget
+* `Music.astro` - Music player widget
+* `Profile.astro` - Profile and social links widget
+* `SidebarTOC.astro` - Sidebar table of contents
+* `SiteInfo.astro` - Site information widget
+* `SiteStats.astro` - Site statistics widget
+* `SpineModel.astro` - Spine character widget
+* `Tags.astro` - Tags widget
 
-特定页面使用的组件，不用于其他页面。
+### ✨ features/ - Global Features & Effects
 
-- `AdvancedSearch.svelte` - 高级搜索组件
+Globally loaded components that enhance site functionality.
 
-**pages/bangumi/** - 番组计划页面组件
-- `BangumiGrid.svelte` - 番组网格布局组件
-- `BangumiSection.astro` - 番组分类展示组件
-- `Card.svelte` - 番组卡片组件
-- `FilterControls.svelte` - 筛选控制组件
-- `TabNav.svelte` - 标签导航组件
+**Managers (Initialization & Feature Management)**
 
-**pages/gallery/** - 相册页面组件
-- `AlbumCard.astro` - 相册卡片组件
-- `PhotoCard.astro` - 照片卡片组件
+* `FancyboxManager.astro` - Fancybox image viewer manager
+* `FontSetup.astro` - Font loading and management using the Astro Font API
+* `KatexManager.astro` - KaTeX math rendering manager
+* `MusicManager.astro` - Global music playback manager. A singleton responsible for the shared audio element, playback state, and synchronization between all `MusicPlayer` instances using `CustomEvent`.
 
-### 💬 comment/ - 评论系统组件
+**Feature Components**
 
-第三方评论系统集成组件。
+* `EncryptedContent.astro` - Encrypted content
+* `EncryptedPost.astro` - Encrypted post
+* `Live2DWidget.astro` - Live2D character widget
+* `MusicPlayer.astro` - Music player UI controller. Handles only the interface while delegating playback logic to `MusicManager`.
+* `SakuraEffect.astro` - Falling sakura effect
+* `SpineModel.astro` - Spine character widget
+* `TypewriterText.astro` - Typewriter animation
 
-- `index.astro` - 评论主组件
-- `Artalk.astro` - Artalk 评论集成
-- `Disqus.astro` - Disqus 评论集成
-- `Giscus.astro` - Giscus 评论集成（GitHub 讨论）
-- `Twikoo.astro` - Twikoo 评论集成
-- `Waline.astro` - Waline 评论集成
+### 📃 pages/ - Page Specific Components
 
-### 📊 analytics/ - 数据统计组件
+Components used exclusively on specific pages.
 
-网站分析和统计集成组件。
+* `AdvancedSearch.svelte` - Advanced search component
 
-- `GoogleAnalytics.astro` - Google Analytics
-- `La51Analytics.astro` - 51la 统计
-- `MicrosoftClarity.astro` - Microsoft Clarity
-- `UmamiAnalytics.astro` - Umami 统计
+**pages/bangumi/** - Bangumi Page Components
 
-### 🔧 misc/ - 杂项工具组件
+* `BangumiGrid.svelte` - Bangumi grid layout
+* `BangumiSection.astro` - Bangumi category section
+* `Card.svelte` - Bangumi card
+* `FilterControls.svelte` - Filter controls
+* `TabNav.svelte` - Tab navigation
 
-其他辅助和工具类组件。
+**pages/gallery/** - Gallery Page Components
 
-- `License.astro` - 许可证信息显示
-- `RecommendedPost.astro` - 推荐文章组件
-- `SharePoster.svelte` - 分享海报生成
+* `AlbumCard.astro` - Album card
+* `PhotoCard.astro` - Photo card
+
+### 💬 comment/ - Comment System Components
+
+Integrations with third party comment systems.
+
+* `index.astro` - Main comment component
+* `Artalk.astro` - Artalk integration
+* `Disqus.astro` - Disqus integration
+* `Giscus.astro` - Giscus integration using GitHub Discussions
+* `Twikoo.astro` - Twikoo integration
+* `Waline.astro` - Waline integration
+
+### 📊 analytics/ - Analytics Components
+
+Website analytics and tracking integrations.
+
+* `GoogleAnalytics.astro` - Google Analytics
+* `La51Analytics.astro` - 51la Analytics
+* `MicrosoftClarity.astro` - Microsoft Clarity
+* `UmamiAnalytics.astro` - Umami Analytics
+
+### 🔧 misc/ - Miscellaneous Components
+
+Utility and helper components.
+
+* `License.astro` - License information
+* `RecommendedPost.astro` - Recommended posts
+* `SharePoster.svelte` - Share poster generator
 
 ---
 
-## 🗂️ 分类原则
+## 🗂️ Organization Principles
 
-| 分类 | 用途 | 特点 |
-|------|------|------|
-| **layout/** | 页面布局和结构 | 决定整体页面框架 |
-| **controls/** | 导航和交互 | 用户交互功能 |
-| **common/** | 通用可复用组件 | 跨多个页面/组件使用 |
-| **widget/** | 侧边栏小部件 | 侧边栏特定组件 |
-| **features/** | 全局功能特效 | 全局加载的增强功能 |
-| **pages/** | 页面特定组件 | 仅在特定页面使用 |
-| **comment/** | 评论系统 | 第三方服务集成 |
-| **analytics/** | 数据统计 | 分析和统计服务 |
-| **misc/** | 工具和辅助 | 其他杂项功能 |
+| Directory      | Purpose                  | Description                                      |
+| -------------- | ------------------------ | ------------------------------------------------ |
+| **layout/**    | Page layout              | Defines the overall page structure               |
+| **controls/**  | Navigation & interaction | User interaction and navigation                  |
+| **common/**    | Shared components        | Reusable across multiple pages and components    |
+| **widget/**    | Sidebar widgets          | Components designed specifically for the sidebar |
+| **features/**  | Global features          | Site wide enhancements loaded globally           |
+| **pages/**     | Page specific            | Used only on specific pages                      |
+| **comment/**   | Comment system           | Third party comment integrations                 |
+| **analytics/** | Analytics                | Website analytics and tracking services          |
+| **misc/**      | Utilities                | Miscellaneous helper components                  |

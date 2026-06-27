@@ -74,26 +74,26 @@ const {
 	bannerPostMeta,
 } = Astro.props;
 
-// 检查背景壁纸模式和是否允许切换
+// Check background wallpaper mode and whether switching is allowed
 const isBannerMode = backgroundWallpaper.mode === "banner";
 const isFullscreenMode = backgroundWallpaper.mode === "fullscreen";
 const isOverlayMode = backgroundWallpaper.mode === "overlay";
 const isBackgroundEnabled = backgroundWallpaper.mode !== "none";
 const isWallpaperSwitchable = backgroundWallpaper.switchable ?? true;
 
-// 检查是否启用水波纹动画效果
+// Check whether wave animation effect is enabled
 const wavesConfig = backgroundWallpaper.common?.waves?.enable;
 const wavesSwitchable = backgroundWallpaper.common?.waves?.switchable ?? false;
-// 处理分设备控制的水波纹动画
+// Handle per-device wave animation control
 const wavesEnabledOnDesktop =
 	typeof wavesConfig === "object" ? wavesConfig.desktop : wavesConfig;
 const wavesEnabledOnMobile =
 	typeof wavesConfig === "object" ? wavesConfig.mobile : wavesConfig;
-// 是否需要渲染水波纹元素（任一设备启用 或 允许用户切换）
+// Whether to render wave elements (enabled on any device OR user switching allowed)
 const shouldRenderWaves =
 	wavesEnabledOnDesktop || wavesEnabledOnMobile || wavesSwitchable;
 
-// 渐变过渡配置
+// Gradient transition config
 const gradientConfig = backgroundWallpaper.common?.gradient?.enable;
 const gradientSwitchable =
 	backgroundWallpaper.common?.gradient?.switchable ?? false;
@@ -106,19 +106,19 @@ const gradientEnabledOnMobile =
 		? gradientConfig.mobile
 		: (gradientConfig ?? true);
 const gradientHeight = backgroundWallpaper.common?.gradient?.height ?? "30vh";
-// 是否需要渲染渐变元素（任一设备启用 或 允许用户切换）
+// Whether to render gradient elements (enabled on any device OR user switching allowed)
 const shouldRenderGradient =
 	gradientEnabledOnDesktop || gradientEnabledOnMobile || gradientSwitchable;
 
-// 检查是否为首页
+// Check whether this is the home page
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 
 const shouldRenderCategoryBar = !!siteConfig.categoryBar;
 
-// 检查是否在文章详情页
+// Check whether we're on a post detail page
 const isPostPage = !!postSlug;
 
-// 随机选择副标题（当打字机关闭且为数组时）
+// Randomly pick a subtitle (when typewriter is off and subtitle is an array)
 const getRandomSubtitle = () => {
 	const subtitle = backgroundWallpaper.common?.homeText?.subtitle;
 	if (Array.isArray(subtitle)) {
@@ -129,7 +129,7 @@ const getRandomSubtitle = () => {
 };
 const randomSubtitle = getRandomSubtitle();
 
-// 主页横幅文本只在首页且全局开关为 true 时显示，不区分设备
+// Home banner text is shown only on the home page when the global toggle is true, regardless of device
 const homeTextEnable = backgroundWallpaper.common?.homeText?.enable;
 const showHomeText =
 	(isBannerMode || isFullscreenMode) && !!homeTextEnable && isHomePageCheck;
@@ -150,30 +150,30 @@ const showBannerPageTitle =
 	!isHomePageCheck &&
 	!isPostPage &&
 	!!title;
-// 手机端非首页不显示banner的CSS类
+// CSS class to hide banner on mobile for non-home pages
 const mobileNonHomeBannerClass = !isHomePageCheck ? "mobile-hide-banner" : "";
 
-// 计算主内容区域位置，考虑手机端非首页时banner被隐藏
+// Calculate main content area position, accounting for hidden banner on mobile non-home pages
 const mainPanelTop =
 	isBannerMode && isBackgroundEnabled
 		? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 		: "5.5rem";
 
-// 当banner模式被禁用时，主内容区域应该始终从顶栏下面开始
-// 非首页在小于1024px时会通过 mobile-main-no-banner CSS类覆盖top值为5.5rem
+// When banner mode is disabled, main content should always start below the top bar.
+// On non-home pages below 1024px the top value is overridden to 5.5rem via mobile-main-no-banner CSS class
 const finalMainPanelTop =
 	isBannerMode && isBackgroundEnabled ? mainPanelTop : "5.5rem";
 
-// 获取响应式侧边栏配置
+// Get responsive sidebar config
 const sidebarConfig = getResponsiveSidebarConfig();
 
-// 在文章页面且启用了showBothSidebarsOnPostPage时，确保对侧组件参与网格计算
+// On post pages with showBothSidebarsOnPostPage enabled, make sure opposite-side components participate in grid calculations
 const shouldShowBothSidebarsOnPostPage: boolean =
 	isPostPage &&
 	sidebarLayoutConfig.position !== "both" &&
 	!!sidebarLayoutConfig.showBothSidebarsOnPostPage;
 
-// position为left时，对侧为右侧；position为right时，对侧为左侧
+// When position is left the opposite side is right; when position is right the opposite side is left
 const shouldAddRightSidebar: boolean =
 	shouldShowBothSidebarsOnPostPage && sidebarLayoutConfig.position === "left";
 const shouldAddLeftSidebar: boolean =
@@ -190,8 +190,8 @@ const effectiveHasLeftComponents: boolean =
 	(shouldAddLeftSidebar &&
 		sidebarLayoutConfig.leftComponents.some((comp) => comp.enable));
 
-// 使用effective值重新生成网格类
-// 当position为right且文章页临时显示左侧栏时，tabletSidebar应为right（保持显示主侧栏）
+// Regenerate grid classes using effective values.
+// When position is right and left sidebar is temporarily shown on post pages, tabletSidebar should be right (keep showing the main sidebar)
 const effectiveTabletSidebar = shouldAddLeftSidebar
 	? ("right" as const)
 	: sidebarConfig.tabletSidebar;
@@ -220,7 +220,7 @@ if (
 	updatedGridConfig.hasLeftComponents &&
 	updatedGridConfig.hasRightComponents
 ) {
-	// 双侧栏：Footer 在平板与桌面都跟随内容列
+	// Both sidebars: Footer follows the content column on tablet and desktop
 	if (updatedGridConfig.tabletSidebar === "right") {
 		footerClass.push(
 			"md:col-start-1 md:col-span-1 xl:col-start-2 xl:col-span-1",
@@ -234,13 +234,13 @@ if (
 	updatedGridConfig.hasLeftComponents &&
 	!updatedGridConfig.hasRightComponents
 ) {
-	// 仅左侧栏：内容列在第2列
+	// Left sidebar only: content column is in column 2
 	footerClass.push("md:col-start-2 md:col-span-1 xl:col-start-2 xl:col-span-1");
 } else if (
 	!updatedGridConfig.hasLeftComponents &&
 	updatedGridConfig.hasRightComponents
 ) {
-	// 仅右侧栏：内容列在第1列
+	// Right sidebar only: content column is in column 1
 	footerClass.push("md:col-start-1 md:col-span-1 xl:col-start-1 xl:col-span-1");
 } else {
 	footerClass.push("md:col-start-1 md:col-span-1 xl:col-start-1 xl:col-span-1");
@@ -248,13 +248,13 @@ if (
 
 const footerClassName = footerClass.join(" ");
 
-// 检查是否应该启用半透明效果
+// Check whether transparency effect should be enabled
 const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
 
 const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 const stickyNavbar = siteConfig.navbar.stickyNavbar ?? false;
 
-// 获取图片质量配置
+// Get image quality config
 const configQuality = getImageQuality();
 const mobileQuality = Math.round(configQuality * 0.9);
 const bannerCarouselEnabledDefault =
@@ -274,7 +274,7 @@ const hasMultipleImages =
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
 
 
-<!-- 为全屏壁纸模式添加body类 -->
+<!-- Add body class for fullscreen wallpaper mode -->
 {shouldEnableTransparency && (
 	<script>
 		document.body.classList.add('wallpaper-transparent');
@@ -302,7 +302,7 @@ const hasMultipleImages =
     </div>
 </div>
 
-<!-- Wallpaper - 如果允许切换则始终渲染，否则只渲染当前模式 -->
+<!-- Wallpaper - always render if switching is allowed, otherwise render only the current mode -->
 {(isWallpaperSwitchable || isBannerMode || isFullscreenMode || isOverlayMode) && (
 <div id="wallpaper-wrapper" class:list={[
 	`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`,
@@ -317,9 +317,9 @@ const hasMultipleImages =
 				? ``
 				: `top: -${BANNER_HEIGHT_EXTEND}vh`
 }>
-    <!-- 背景图片显示 -->
+    <!-- Background image display -->
     {hasMultipleImages ? (
-    <!-- 轮播模式：渲染所有图片为 slide-item -->
+    <!-- Carousel mode: render all images as slide-items -->
     <div class:list={["relative h-full w-full bg-black", `effect-${bannerCarouselEffect}`]} id="banner-images-container"
          style={`z-index: 5; --carousel-interval: ${bannerCarouselInterval}ms`}
          data-carousel-enabled={bannerCarouselEnabledDefault}
@@ -359,7 +359,7 @@ const hasMultipleImages =
         ))}
     </div>
     ) : (
-    <!-- 单图模式 -->
+    <!-- Single image mode -->
     <div class="relative h-full w-full" id="banner-images-container">
         {backgroundImages.mobile.length > 0 && (
             <div class="banner-image-slot-mobile absolute inset-0 block lg:hidden">
@@ -395,7 +395,7 @@ const hasMultipleImages =
     </div>
     )}
 
-    <!-- 壁纸轮播脚本（基于 CSS transition） -->
+    <!-- Wallpaper carousel script (CSS transition-based) -->
     {hasMultipleImages && (
     <script is:inline data-swup-ignore-script>
         (function initBannerCarousel() {
@@ -410,7 +410,7 @@ const hasMultipleImages =
             var FADE_MS = 800;
             var transitioning = false;
 
-            // 创建过渡遮罩（用于 kenburns 效果的 LQIP 桥接）
+            // Create transition overlay (for LQIP bridging in kenburns effect)
             var overlay = null;
             if (effect === 'kenburns') {
                 overlay = document.createElement('div');
@@ -418,7 +418,7 @@ const hasMultipleImages =
                 container.appendChild(overlay);
             }
 
-            // 从 slide-item 中提取 LQIP 渐变样式
+            // Extract LQIP gradient style from a slide-item
             function getSlideLqipStyle(slide) {
                 var ph = slide.querySelector('.lqip-placeholder');
                 if (ph) {
@@ -440,7 +440,7 @@ const hasMultipleImages =
                 return mode === WALLPAPER_BANNER || mode === 'fullscreen';
             }
 
-            // 获取当前设备可见的 slide-item
+            // Get currently visible slide-items for the current device
             function getVisibleSlides() {
                 var all = container.querySelectorAll('.slide-item');
                 var isLg = window.innerWidth >= 1024;
@@ -465,7 +465,7 @@ const hasMultipleImages =
             }
 
             function applySlideChange(slides, nextIndex) {
-                // Slide 效果需要 prev-waiting 辅助类
+                // Slide effect needs the prev-waiting helper class
                 if (effect === 'slide') {
                     for (var i = 0; i < slides.length; i++) {
                         slides[i].classList.remove('prev-waiting');
@@ -491,20 +491,20 @@ const hasMultipleImages =
                 if (nextIndex === currentIndex) return;
 
                 if (effect === 'kenburns' && overlay) {
-                    // Ken Burns: 用下一张图的 LQIP 做桥接过渡
+                    // Ken Burns: use the next slide's LQIP as a bridge transition
                     transitioning = true;
                     overlay.style.background = getSlideLqipStyle(slides[nextIndex]);
                     overlay.style.opacity = '1';
                     setTimeout(function() {
                         applySlideChange(slides, nextIndex);
-                        // 等新图 Ken Burns 动画开始后再移除遮罩
+                        // Remove overlay after the new image's Ken Burns animation starts
                         setTimeout(function() {
                             overlay.style.opacity = '0';
                             transitioning = false;
                         }, 150);
                     }, FADE_MS / 2);
                 } else {
-                    // 其他效果：直接切换（CSS transition 处理）
+                    // Other effects: switch directly (CSS transition handles animation)
                     applySlideChange(slides, nextIndex);
                 }
 
@@ -543,7 +543,7 @@ const hasMultipleImages =
                 }
             }
 
-            // 键盘控制
+            // Keyboard controls
             document.addEventListener('keydown', function(e) {
                 if (!isBannerWallpaperMode() || !isCarouselEnabled()) return;
                 if (e.key === 'ArrowRight') {
@@ -558,7 +558,7 @@ const hasMultipleImages =
                 }
             });
 
-            // 触屏滑动
+            // Touch swipe
             document.addEventListener('touchstart', function(e) {
                 appState.touchStartX = e.changedTouches[0].screenX;
             }, { passive: true });
@@ -572,7 +572,7 @@ const hasMultipleImages =
                 }
             }, { passive: true });
 
-            // 事件监听
+            // Event listeners
             window.addEventListener('bannerCarouselChange', function(e) {
                 e.detail && e.detail.enabled ? startAutoPlay() : stopAutoPlay();
             });
@@ -584,7 +584,7 @@ const hasMultipleImages =
                 }
             });
 
-            // 随机首张
+            // Randomise the first slide
             var slides = getVisibleSlides();
             if (slides.length > 1) {
                 var randomIdx = Math.floor(Math.random() * slides.length);
@@ -594,14 +594,14 @@ const hasMultipleImages =
                 }
             }
 
-            // 启动
+            // Start
             if (isCarouselEnabled() && isBannerWallpaperMode()) {
                 startAutoPlay();
             }
         })();
     </script>
     )}
-    
+
     {backgroundWallpaper.playerEnable && typeof backgroundWallpaper.src === "object" && !Array.isArray(backgroundWallpaper.src) && backgroundWallpaper.src.playerUrl && (
         <BackgroundPlayer playerUrl={backgroundWallpaper.src.playerUrl} playerMode={backgroundWallpaper.common?.playerMode ?? "order"} />
     )}
@@ -610,7 +610,7 @@ const hasMultipleImages =
         {showBannerDim && <div class="banner-dim-overlay absolute inset-0" style={`background: rgba(0, 0, 0, ${dimOpacity})`}></div>}
     </div>
 
-    <div id="banner-overlay-container" class="absolute inset-0 z-20 pointer-events-none transition-swup-fade">    <!-- Home page text overlay - 始终渲染以便切换模式时控制显示 -->
+    <div id="banner-overlay-container" class="absolute inset-0 z-20 pointer-events-none transition-swup-fade">    <!-- Home page text overlay - always rendered so mode switching can control visibility -->
     {homeTextEnable && (
         <div class={`banner-home-text-overlay absolute inset-0 z-20 flex items-center justify-center ${!showHomeText ? 'hidden' : ''}`}>
             <div class="w-4/5 lg:w-3/4 text-center mb-0">
@@ -649,10 +649,10 @@ const hasMultipleImages =
 
             try {
                 const subtitles = JSON.parse(subtitlesData);
-                // Only randomize if it's an array and typewriter is NOT enabled (check for typewriter class)
+                // Only randomise if it's an array and typewriter is NOT enabled (check for typewriter class)
                 if (Array.isArray(subtitles) && subtitles.length > 0 && !subtitleElement.querySelector('.typewriter')) {
-                    // Use a global variable to persist the subtitle across Swup navigations
-                    // This variable will be reset on full page reload (F5), meeting the requirement
+                    // Use a global variable to persist the subtitle across Swup navigations.
+                    // This variable resets on full page reload (F5), which is the intended behaviour.
                     if (!window.fireflyCachedSubtitle) {
                         const randomIndex = Math.floor(Math.random() * subtitles.length);
                         window.fireflyCachedSubtitle = subtitles[randomIndex];
@@ -722,11 +722,11 @@ const hasMultipleImages =
         </div>
     )}
 
-    <!-- Fullscreen 模式下显示向下滚动指示器 -->
+    <!-- Scroll-down indicator shown in fullscreen mode -->
     {(isFullscreenMode || isWallpaperSwitchable) && <ScrollDownIndicator />}
     </div>
 
-    <!-- Water waves effect - 如果允许切换或任一设备启用则渲染 -->
+    <!-- Water waves effect - render if switching is allowed or enabled on any device -->
     {shouldRenderWaves ? (
     <div class={`waves absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full md:h-[15vh]
         ${!wavesEnabledOnMobile ? 'hidden' : ''} ${!wavesEnabledOnDesktop ? 'md:hidden' : ''} ${wavesEnabledOnDesktop ? 'md:block' : ''}`}
@@ -777,7 +777,7 @@ const hasMultipleImages =
     </div>
     ) : null}
 
-    <!-- Gradient transition - 当水波纹关闭时显示，提供壁纸底部到背景色的平滑过渡 -->
+    <!-- Gradient transition - shown when waves are off, provides a smooth fade from wallpaper bottom to background color -->
     {shouldRenderGradient ? (
     <div class={`wallpaper-gradient absolute bottom-0 left-0 w-full pointer-events-none
         ${!gradientEnabledOnMobile ? 'hidden' : ''} ${!gradientEnabledOnDesktop ? 'md:hidden' : ''} ${gradientEnabledOnDesktop ? 'md:block' : ''}`}
@@ -788,7 +788,7 @@ const hasMultipleImages =
 </div>
 )}
 
-{/* 当壁纸未渲染时，添加空的 Swup 占位容器，避免 Swup 找不到容器而回退为整页加载 */}
+{/* When wallpaper is not rendered, add empty Swup placeholder containers to prevent Swup from falling back to a full page load */}
 {!(isWallpaperSwitchable || isBannerMode || isFullscreenMode || isOverlayMode) && (
 <>
     <div id="banner-overlay-container" class="hidden"></div>
@@ -798,20 +798,23 @@ const hasMultipleImages =
 
 <!-- Main content -->
 <div class={`absolute w-full z-30 pointer-events-none ${mobileNonHomeBannerClass ? 'mobile-main-no-banner' : ''} ${!(isBannerMode && isBackgroundEnabled) ? 'no-banner-layout' : ''}`} style={isFullscreenMode ? 'top: 0;' : `top: ${finalMainPanelTop}`}>
-    <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
+    <!-- pointer-events-none here prevents blocking click events on the TOC -->
     <div class="relative w-full xl:w-[92vw] max-w-(--page-width) mx-auto pointer-events-auto">
         <div id="main-grid"
-          class={`transition duration-700 w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
+          class={`transition duration-700 w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[1fr_auto] min-h-screen mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
           data-sidebar-position={sidebarLayoutConfig.position}
           data-tablet-sidebar={sidebarLayoutConfig.tabletSidebar ?? "left"}
           data-show-both-sidebars-on-post={sidebarLayoutConfig.showBothSidebarsOnPostPage ? "true" : "false"}
         >
 
-            {/* 渲染左侧边栏 - 根据position和tabletSidebar配置显示 */}
+            {/* Render left sidebar - visibility driven by position and tabletSidebar config */}
             {/*
-                如果全局配置为双侧栏(position: both)或仅左侧栏(position: left)，则使用静态容器(不被swup替换)，避免闪烁。
-                如果全局配置为仅右侧栏(position: right)，则使用动态容器(被swup替换)，以便在文章页显示左侧栏。
-                注意：为了满足swup要求所有containers必须存在，我们在所有模式下都必须渲染 #left-sidebar-dynamic。
+                If the global config is both sidebars (position: both) or left-only (position: left),
+                use a static container (not replaced by Swup) to avoid flicker.
+                If global config is right-only (position: right), use a dynamic container (replaced by Swup)
+                so the left sidebar can appear on post pages.
+                Note: to satisfy Swup's requirement that all containers exist, #left-sidebar-dynamic
+                must always be rendered.
             */}
             {sidebarLayoutConfig.position !== "right" ? (
                 <>
@@ -833,20 +836,20 @@ const hasMultipleImages =
                     )}
                 </div>
             )}
-                    
-            {/* 主内容区包装器 - 包含静态栏位和swup容器，作为单个grid item */}
+
+            {/* Main content area wrapper - contains the static bar and Swup container as a single grid item */}
             <div class={staticBarClass}>
-                {/* 分类导航栏 - 全站渲染并显示 */}
+                {/* Category nav bar - rendered and visible site-wide */}
                 {shouldRenderCategoryBar && <div id="category-bar-wrapper"><CategoryBar currentPostCategory={postCategory} /></div>}
-                {/* 主内容区 - 始终渲染，确保 Swup 容器存在 */}
+                {/* Main content area - always rendered to ensure the Swup container exists */}
                 <main
                     id="swup-container"
                     class="transition-main"
                     data-current-post-category={postCategory || ""}
                 >
-                {/* 携带网格布局类名，用于JS更新父容器 */}
+                {/* Carries the grid layout class name so JS can update the parent container */}
                 <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
-                {/* 为每个页面提供一个隐藏的h1标题，用于SEO和可访问性 */}
+                {/* Hidden h1 for each page - for SEO and accessibility */}
                 <h1 class="sr-only">{title}</h1>
                 <div id="content-wrapper" class="onload-animation transition-leaving">
                     <slot></slot>
@@ -854,12 +857,14 @@ const hasMultipleImages =
             </main>
             </div>
 
-            {/* 右侧边栏 - 双侧边栏模式或仅右侧栏模式 */}
+            {/* Right sidebar - shown in both-sidebars or right-only mode */}
             {/*
-                如果全局配置为双侧栏(position: both)或仅右侧栏(position: right)，则使用静态容器(不被swup替换)，避免闪烁。
-                如果全局配置为单侧栏(position: left)，则使用动态容器(被swup替换)，以便在文章页显示右侧栏。
-                注意：为了满足swup要求所有containers必须存在，我们在所有模式下都必须渲染 #right-sidebar-dynamic。
-                右侧边栏的显示由CSS类控制。
+                If the global config is both sidebars (position: both) or right-only (position: right),
+                use a static container (not replaced by Swup) to avoid flicker.
+                If global config is left-only (position: left), use a dynamic container (replaced by Swup)
+                so the right sidebar can appear on post pages.
+                Note: to satisfy Swup's requirement that all containers exist, #right-sidebar-dynamic
+                must always be rendered. Right sidebar visibility is controlled by CSS classes.
             */}
             {(sidebarLayoutConfig.position === "both" || sidebarLayoutConfig.position === "right") ? (
                 <>
@@ -878,7 +883,7 @@ const hasMultipleImages =
                 </div>
             )}
 
-            {/* 移动端底部组件 - 768px及以下显示 */}
+            {/* Mobile bottom components - shown at 768px and below */}
             {sidebarLayoutConfig.mobileBottomComponents && sidebarLayoutConfig.mobileBottomComponents.length > 0 && (
                 <div id="mobile-bottom-sidebar" class="col-span-1 block md:hidden mt-4">
 					<SideBar side="bottom" headings={headings}></SideBar>
@@ -901,7 +906,7 @@ const hasMultipleImages =
 </Layout>
 
 <style is:global>
-  /* 右侧栏平滑过渡 */
+  /* Right sidebar smooth transition */
   #right-sidebar {
     transition: opacity 0.35s ease-in-out,
                 transform 0.35s ease-in-out;
@@ -917,4 +922,3 @@ const hasMultipleImages =
   }
 
 </style>
-

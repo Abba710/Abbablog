@@ -47,7 +47,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
       type: "announcement",
 
       // Enable component
-      enable: true,
+      enable: false,
 
       // Component position
       position: "top",
