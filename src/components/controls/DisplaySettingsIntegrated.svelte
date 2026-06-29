@@ -307,6 +307,7 @@ function toggleBannerCarouselEnabled() {
 function toggleSakuraEnabled() {
 	sakuraEnabled = !sakuraEnabled;
 	setSakuraEnabled(sakuraEnabled);
+	window.location.reload()
 }
 
 function switchWallpaperMode(newMode: WALLPAPER_MODE) {

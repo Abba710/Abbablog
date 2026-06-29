@@ -55,7 +55,7 @@ function getTypeColor(seasonType: number): string {
 	role="button"
 	tabindex="0"
 >
-	<!-- 海报 -->
+	<!-- Poster -->
 	<div class="relative aspect-2/3 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
 		{#if anime.poster}
 			<div class="lqip-placeholder absolute inset-0 pointer-events-none" style="background: var(--muted)" aria-hidden="true"></div>
@@ -77,7 +77,7 @@ function getTypeColor(seasonType: number): string {
 			</div>
 		{/if}
 
-		<!-- 评分角标（右上） -->
+		<!-- Rating badge (top right) -->
 		{#if anime.rating > 0}
 			<div class="absolute top-2 right-2 flex items-center gap-1 rounded-lg bg-black/70 backdrop-blur-sm px-2 py-1 text-xs font-bold text-white">
 				<svg class="h-3 w-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
@@ -87,17 +87,17 @@ function getTypeColor(seasonType: number): string {
 			</div>
 		{/if}
 
-		<!-- 类型角标（左上） -->
+		<!-- Type badge (top left) -->
 		<div class="absolute top-2 left-2 rounded-lg {getTypeColor(anime.season_type)} px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
 			{getTypeLabel(anime.season_type)}
 		</div>
 
-		<!-- 来源标签 -->
+		<!-- Source label -->
 		<div class="absolute bottom-2 left-2 rounded-md {anime.source === 'bilibili' ? 'bg-pink-500/80' : 'bg-emerald-500/80'} px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
 			{anime.source === 'bilibili' ? 'Bilibili' : 'TMDB'}
 		</div>
 
-		<!-- 悬停遮罩 -->
+		<!-- Hover overlay -->
 		<div class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 			<div class="p-3">
 				<p class="mb-2 line-clamp-3 text-xs text-white/90 leading-relaxed">{anime.overview || i18n(I18nKey.animeNoOverview)}</p>
@@ -108,19 +108,19 @@ function getTypeColor(seasonType: number): string {
 		</div>
 	</div>
 
-	<!-- 底部信息 -->
+	<!-- Bottom info -->
 	<div class="p-3">
-		<!-- 标题 -->
+		<!-- Title -->
 		<h3 class="mb-1 line-clamp-1 text-sm font-semibold text-neutral-900 dark:text-neutral-100" title={anime.title}>
 			{anime.title}
 		</h3>
-		<!-- 原文标题 -->
+		<!-- Original title -->
 		{#if anime.originalTitle && anime.originalTitle !== anime.title}
 			<p class="mb-2 line-clamp-1 text-xs text-neutral-500 dark:text-neutral-400" title={anime.originalTitle}>
 				{anime.originalTitle}
 			</p>
 		{/if}
-		<!-- 底部信息行 -->
+		<!-- Bottom info row -->
 		<div class="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
 			<span>{anime.epStatus || anime.date?.slice(0, 4) || ""}</span>
 		</div>
