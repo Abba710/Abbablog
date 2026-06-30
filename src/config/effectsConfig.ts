@@ -4,7 +4,7 @@ import type { SakuraConfig } from "../types/effectsConfig";
 // Centralized configuration for animation effects
 export const sakuraConfig: SakuraConfig = {
   // Enable sakura (falling cherry blossom) effect
-  enable: true,
+  enable: false,
 
   // Allow users to toggle the effect in settings
   switchable: true,
