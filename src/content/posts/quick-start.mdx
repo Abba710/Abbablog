@@ -1,0 +1,80 @@
+---
+title: "Locker: Quick Start & Transparency"
+published: 2026-01-06
+description: "How to set up the extension in 2 minutes and why it requests these permissions. An honest conversation from developer to user."
+image: "../../assets/images/Pages/lockerquickprev.png"
+tags: ["chrome"]
+category: "Guide"
+draft: false
+lang: "EN"
+---
+
+import Accordion from "../../components/MDX/Accordion.astro";
+
+# Locker: Quick Start & Transparency
+
+Set up Locker in less than 2 minutes and learn exactly why the extension requests certain permissions. No marketing language, just an honest explanation from the developer.
+
+## Step 1. Pin the Extension
+
+Click the **Puzzle** icon 🧩 in Chrome, find **Locker**, and click the **Pin** 📌 icon so it is always easy to access.
+
+## Step 2. Enable Incognito Mode
+
+Open the extension details page and enable **Allow in Incognito**.
+
+This allows Locker to work with private browsing sessions while keeping your data encrypted.
+
+## Step 3. Create Your Master Password
+
+Your Master Password is stored **only on your device**.
+
+I cannot see it, recover it, or send it anywhere because it never leaves your computer.
+
+> If you forget your Master Password, your encrypted data may become inaccessible unless Cloud Sync was enabled beforehand.
+
+## Step 4. Configure Hotkeys
+
+Chrome requires keyboard shortcuts to be configured manually.
+
+Open **chrome://extensions/shortcuts** and assign the shortcuts you want.
+
+---
+
+# Transparency
+
+People often ask why Locker requests several permissions. That's a fair question.
+
+Here is exactly what each permission is used for.
+
+<Accordion title="Debugger & Scripting">
+These permissions are used exclusively for the **Web to PDF** feature. When you click **Save as PDF**, Locker temporarily captures the page exactly as it appears in your browser so it can generate a clean, high quality PDF. The debugger is **not** used to monitor your browsing activity and only runs while creating the PDF.
+</Accordion>
+
+<Accordion title="Access to all hosts">
+Locker can save bookmarks or generate PDFs from virtually any website, including YouTube, Medium, GitHub, localhost, and other pages you visit.
+
+Chrome requires host permissions before an extension can access the current page.
+
+Without this permission, Locker would only work on a small number of websites.
+</Accordion>
+
+<Accordion title="Tabs & Tab Groups">
+These permissions power the **Tab Manager** feature.
+
+Locker can save your currently opened tabs as organized groups, close them to free memory, and restore everything later.
+
+Everything is stored locally unless you explicitly enable Cloud Sync.
+</Accordion>
+
+<Accordion title="Identity">
+This permission is used only for secure authentication with **Google OAuth**.
+
+It allows you to sign in and synchronize your encrypted data across your own devices if you choose to enable Cloud Sync.
+</Accordion>
+
+<Accordion title="Downloads">
+This permission lets Locker save generated PDFs directly to your computer.
+
+It is also required when exporting your bookmarks as HTML or JSON so you always have full control over your own data.
+</Accordion>
