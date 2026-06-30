@@ -1,0 +1,119 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// All content in English (hardcoded)
+const title = "Privacy Policy";
+const updated = "Last updated: January 8, 2026";
+const intro =
+  "Privacy is not an option; it is the foundation of Locker. I built this extension to ensure your data belongs only to you.";
+const backText = "← Back to Project";
+
+const sections = [
+  {
+    icon: "account-box",
+    title: "User Identification",
+    text: "Locker uses Google authorization for Cloud Sync and Pro features. We only access your name, email, and Google ID for account management. This data is used solely for account support and is never shared with third parties.",
+  },
+  {
+    icon: "visibility-off",
+    title: "Bookmark Content",
+    text: "Locker DOES NOT collect or analyze your bookmark content or browsing history. Your links are your private information. When sync is enabled, data is stored on servers only in encrypted form.",
+  },
+  {
+    icon: "database-off",
+    title: "Local Storage & Deletion",
+    text: "By default, all data is stored locally in your browser. The developer has no technical means to access your local bookmarks. You can delete local or cloud data at any time via the extension settings.",
+  },
+  {
+    icon: "database",
+    title: "Encryption & Cloud",
+    text: "When syncing, your data is encrypted client-side via your master password (AES-256) before reaching the cloud. We use a Zero-Knowledge architecture: even the developer cannot decrypt your data without your password. Data is never sent in plaintext.",
+  },
+  {
+    icon: "verified",
+    title: "Chrome Permissions",
+    text: "The \"debugger\" permission is used only for the Web-to-PDF feature and not for tracking. The \"tabs\" permission is required for managing bookmarks and opening links in Incognito mode, and is not used to collect information about user activity.",
+  },
+];
+
+const contactEmail = "abba4game@gmail.com";
+const contactText = "Security concerns? Reach out directly: ";
+---
+
+<MainGridLayout title={title} description="Privacy Policy for Locker extension">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      <div class="max-w-4xl mx-auto px-6 pt-8 pb-20">
+        <!-- Header -->
+        <header class="mb-16">
+          <div class="text-sm font-medium text-(--primary) mb-4">
+            {updated}
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-black mb-6 tracking-tight text-neutral-900 dark:text-neutral-100">
+            {title}
+          </h1>
+          <p class="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
+            {intro}
+          </p>
+        </header>
+
+        <!-- Divider -->
+        <div class="w-full h-px bg-(--line-divider) mb-20" />
+
+        <!-- Sections -->
+        <div class="grid grid-cols-1 gap-12">
+          {
+            sections.map((section, idx) => (
+              <section
+                class="flex flex-col sm:flex-row gap-6 opacity-0 animate-fade-in-up"
+                style={`animation-delay: ${idx * 100}ms; animation-fill-mode: forwards;`}
+              >
+                <div class="shrink-0">
+                  <div class="w-12 h-12 bg-(--btn-regular-bg) text-(--primary) rounded-2xl flex items-center justify-center border border-(--line-divider)">
+                    <Icon name={`material-symbols:${section.icon}`} class="text-[1.5rem]" />
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-neutral-100">
+                    {section.title}
+                  </h2>
+                  <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {section.text}
+                  </p>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+
+        <!-- Contact Card -->
+        <div class="mt-24 p-8 rounded-[2rem] bg-(--card-bg) border border-(--line-divider) text-center">
+          <p class="text-neutral-600 dark:text-neutral-400">
+            {contactText}
+            <a href={`mailto:${contactEmail}`} class="text-(--primary) font-bold hover:underline">
+              {contactEmail}
+            </a>
+          </p>
+        </div>
+
+        <!-- Footer with back link -->
+        <footer class="mt-16 pt-8 border-t border-(--line-divider)">
+          <a href="/projects/locker/" class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-(--primary) transition-colors font-medium">
+            {backText}
+          </a>
+        </footer>
+      </div>
+    </div>
+  </div>
+</MainGridLayout>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>

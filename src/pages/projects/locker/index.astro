@@ -1,0 +1,250 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import ReviewsCarousel from "@/components/pages/locker/ReviewsCarousel.astro";
+import lockerHero from "@/assets/images/projects/lockerhero.png";
+
+const CHROME_URL =
+  "https://chromewebstore.google.com/detail/your-extension-id";
+
+const mainFeatures = [
+  {
+    icon: "🔒",
+    title: "Encrypted Bookmarks",
+    desc: "Store bookmarks securely with end to end encryption."
+  },
+  {
+    icon: "⚡",
+    title: "One Click Hide",
+    desc: "Hide all tabs instantly and restore them whenever you need."
+  },
+  {
+    icon: "🤖",
+    title: "AI Summaries",
+    desc: "Summarize articles, PDFs and videos in seconds."
+  }
+];
+const extraFeatures = [
+  "Cloud Sync",
+  "Incognito",
+  "Folders",
+  "Collections",
+  "QR Sharing",
+  "Session Manager",
+  "PDF Uploads",
+  "Tab Groups",
+  "Reading List"
+];
+---
+<script>
+  // Captures `?aff=<id>` on first visit, remembers it, and stamps that id
+  // onto every Chrome Web Store CTA on the page — on this visit and later
+  // ones. Astro scripts run once on the client after the static HTML has
+  // parsed, so this needs no framework hook.
+  const STORAGE_KEY = 'locker-partner-id'
+
+  const incomingAff = new URLSearchParams(window.location.search).get('aff')
+  if (incomingAff) {
+    localStorage.setItem(STORAGE_KEY, incomingAff)
+  }
+
+  const partnerId = localStorage.getItem(STORAGE_KEY)
+  if (partnerId) {
+    document.querySelectorAll('[data-chrome-cta]').forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) return
+      const url = new URL(link.href)
+      url.searchParams.set('aff', partnerId)
+      link.href = url.toString()
+    })
+  }
+</script>
+
+<MainGridLayout title="Locker" description="Locker: hide bookmarks">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      <main class="mx-auto max-w-6xl px-6 py-20">
+
+        <!-- Hero -->
+
+        <section class="mb-32 text-center">
+          <span
+            class="inline-flex rounded-full border border-(--primary)/20 bg-(--primary)/10 px-4 py-1 text-sm font-medium text-(--primary)">
+            Browser Privacy Reinvented
+          </span>
+
+          <h1 class="mt-6 text-5xl font-bold tracking-tight sm:text-7xl text-neutral-900 dark:text-neutral-100">
+            Hide Tabs.
+            <br />
+            Protect Bookmarks.
+            <br />
+            Stay Private.
+          </h1>
+
+          <img
+            src={lockerHero.src}
+            alt="Locker"
+            class="mx-auto mt-10 w-full max-w-5xl rounded-3xl" />
+
+          <p class="mx-auto mt-10 max-w-3xl text-xl text-neutral-600 dark:text-neutral-400">
+            Locker gives you a secure private workspace inside your browser.
+            Hide tabs, encrypt bookmarks, organize research and sync everything
+            safely across devices, even in Incognito.
+          </p>
+
+          <div class="mt-10 flex justify-center">
+            <a
+              href={CHROME_URL}
+              target="_blank"
+              class="rounded-2xl bg-(--primary) px-8 py-4 font-bold text-white dark:text-black/70 transition hover:scale-105">
+              Install for Chrome
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-neutral-600 dark:text-neutral-400">
+            Trusted by 1500+ users ★★★★★
+          </p>
+        </section>
+
+        <ReviewsCarousel />
+
+        <!-- Why -->
+
+        <section class="mb-32 grid gap-16 lg:grid-cols-2">
+
+          <div>
+            <h2 class="mb-6 text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Your browser wasn't built for privacy.
+            </h2>
+
+            <p class="mb-6 leading-8 text-neutral-600 dark:text-neutral-400">
+              Browsers expose more information than most people realize.
+              Tabs stay visible, bookmarks remain accessible and Incognito
+              doesn't protect your current workspace.
+            </p>
+
+            <blockquote
+              class="rounded-r-2xl border-l-4 border-(--primary) bg-(--primary)/5 p-6 italic text-neutral-900 dark:text-neutral-100">
+              Privacy shouldn't require changing how you work.
+            </blockquote>
+          </div>
+
+          <div class="rounded-3xl border border-(--line-divider) bg-(--card-bg) p-8">
+            <h3 class="mb-4 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+              Why Locker?
+            </h3>
+
+            <p class="leading-8 text-neutral-600 dark:text-neutral-400">
+              Locker creates a completely private space inside your browser.
+              Secure bookmarks, encrypted cloud sync, AI powered organization
+              and one click tab protection in one place.
+            </p>
+          </div>
+
+        </section>
+
+        <!-- Features -->
+
+        <section class="mb-32">
+
+          <div class="mb-16 text-center">
+            <h2 class="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Everything you need.
+            </h2>
+
+            <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+              Privacy, productivity and organization together.
+            </p>
+          </div>
+
+          <div class="grid gap-8 md:grid-cols-3">
+            {
+              mainFeatures.map((feature) => (
+                <article class="rounded-3xl border border-(--line-divider) bg-(--card-bg) p-8 transition hover:-translate-y-2 hover:border-(--primary)/50">
+                  <div class="mb-6 text-4xl">{feature.icon}</div>
+
+                  <h3 class="mb-3 text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                    {feature.title}
+                  </h3>
+
+                  <p class="leading-7 text-neutral-600 dark:text-neutral-400">
+                    {feature.desc}
+                  </p>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="mt-12 flex flex-wrap justify-center gap-3">
+            {
+              extraFeatures.map((item) => (
+                <span class="rounded-full border border-(--line-divider) bg-(--btn-regular-bg) px-4 py-2 text-sm text-(--btn-content)">
+                  {item}
+                </span>
+              ))
+            }
+          </div>
+
+        </section>
+
+        <!-- Security -->
+        <section class="relative mb-32 overflow-hidden rounded-[40px] border border-(--line-divider) bg-(--card-bg) p-12 shadow-lg">
+
+          <div class="relative z-10 max-w-2xl">
+
+            <h2 class="mb-6 text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Security First.
+            </h2>
+
+            <p class="mb-8 leading-8 text-neutral-600 dark:text-neutral-400">
+              Your data belongs to you.
+              Every bookmark is encrypted before storage and synced securely
+              across your devices.
+            </p>
+
+            <div class="grid gap-3 sm:grid-cols-2 text-neutral-900 dark:text-neutral-100">
+              <div>✔ AES 256 Encryption</div>
+              <div>✔ Zero Knowledge</div>
+              <div>✔ Incognito Support</div>
+              <div>✔ Secure Cloud Sync</div>
+            </div>
+
+          </div>
+
+          <div class="absolute right-0 top-0 h-96 w-96 translate-x-1/2 -translate-y-1/2 rounded-full bg-(--primary)/20 blur-[120px]"></div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section class="mb-24 text-center">
+
+          <h2 class="mb-8 text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+            Your browser deserves real privacy.
+          </h2>
+
+          <a
+            href={CHROME_URL}
+            target="_blank"
+            class="inline-flex rounded-2xl bg-(--primary) px-10 py-5 text-xl font-bold text-white dark:text-black/70 transition hover:scale-105">
+            Install Locker Free
+          </a>
+
+        </section>
+
+        <!-- Footer -->
+
+        <footer class="flex justify-center gap-8 border-t border-(--line-divider) pt-8 text-sm text-neutral-600 dark:text-neutral-400">
+
+          <a href="/projects/locker/privacy/" class="hover:text-(--primary)">
+            Privacy Policy
+          </a>
+
+          <a href="/projects/locker/terms/" class="hover:text-(--primary)">
+            Terms of Service
+          </a>
+
+        </footer>
+
+      </main>
+    </div>
+  </div>
+</MainGridLayout>

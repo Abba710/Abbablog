@@ -1,0 +1,88 @@
+---
+interface Review {
+  author: string
+  rating: number
+  text: string
+  date: string
+}
+
+const reviews: Review[] = [
+  { author: 'Turbo ClassG', rating: 5, text: 'Pretty good usage so far. Pretty satisfied.', date: 'Feb 2026' },
+  { author: 'Daniel T', rating: 5, text: 'Looks really good.', date: 'Dec 2025' },
+  { author: 'Stephen Luvic', rating: 5, text: 'So far so good, works great!', date: 'Nov 2025' },
+  { author: 'Agnes Chiyungi', rating: 5, text: 'Found this on Reddit — love, love it!', date: 'Oct 2025' },
+  { author: 'Sergejs Grigorjevs', rating: 5, text: 'Super!', date: 'Oct 2025' },
+  { author: 'Rubenjes', rating: 5, text: 'Just what I needed, wahoo!', date: 'Oct 2025' },
+  { author: 'j cox', rating: 5, text: 'Great so far.', date: 'Sep 2025' },
+  { author: 'Ascension', rating: 5, text: "Exactly what I'm looking for, just like the old Secure Bookmarks.", date: 'Jul 2025' },
+  { author: 'Kristopher Dane', rating: 5, text: 'Nice simple extension, cool to have a public dev pipeline shared.', date: 'Jul 2025' },
+  { author: 'Hary', rating: 5, text: 'Working very well. Much better than other extensions for this purpose.', date: 'Jul 2025' },
+  { author: 'Linkor Sayfer', rating: 5, text: 'Impressed with how this one handles tab privacy. Encrypted storage, clean UI.', date: 'Apr 2025' },
+  { author: 'hikkanot', rating: 5, text: 'A great alternative to standard Chrome tab management.', date: 'Apr 2025' },
+]
+
+// Duplicated so the CSS loop has a seamless second half to scroll into.
+const trackReviews = [...reviews, ...reviews]
+
+function stars(count: number) {
+  return Array.from({ length: 5 }, (_, i) => i < count)
+}
+---
+
+<section class="my-8 md:my-12">
+  <p class="text-center font-mono text-xs uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-400 mb-6">
+    Reviews
+  </p>
+
+  <div class="overflow-hidden mask-gradient">
+    <div class="flex gap-4 w-max animate-scroll hover:pause">
+      {
+        trackReviews.map((review) => (
+          <article class="shrink-0 w-72 p-5 rounded-2xl bg-(--card-bg) border border-(--line-divider)">
+            <div class="flex justify-between items-start mb-2.5 gap-2">
+              <div>
+                <p class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{review.author}</p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{review.date}</p>
+              </div>
+              <div class="flex gap-0.5 text-(--primary) shrink-0" aria-label={`${review.rating} out of 5 stars`}>
+                {stars(review.rating).map((filled) => (
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill={filled ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1">
+                    <path d="M8 1.5l1.9 4.2 4.6.5-3.4 3.2.9 4.6L8 11.7l-4 2.3.9-4.6-3.4-3.2 4.6-.5L8 1.5z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">"{review.text}"</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .mask-gradient {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .animate-scroll {
+    animation: scroll 42s linear infinite;
+  }
+
+  .pause:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scroll {
+      animation: none;
+      overflow-x: auto;
+    }
+  }
+</style>

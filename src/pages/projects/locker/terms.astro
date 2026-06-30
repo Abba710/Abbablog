@@ -1,0 +1,118 @@
+---
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// All content in English (hardcoded)
+const title = "Terms of Service";
+const updated = "Last updated: January 8, 2026";
+const intro =
+  "By using the Locker extension, you agree to these terms. Please read them carefully.";
+const backText = "← Back to Project";
+const contactEmail = "abba4game@gmail.com";
+const contactText = "Legal questions? Contact me:";
+
+const sections = [
+  {
+    icon: "description",
+    title: "1. Service Description",
+    text: "Locker is a Chrome browser extension for bookmark and tab management. All functionality is provided on an 'as is' basis. The developer does not guarantee uninterrupted service or absence of errors.",
+  },
+  {
+    icon: "shield",
+    title: "2. Data Responsibility",
+    text: "Locker uses local encryption and cloud sync with AES-256 and Zero-Knowledge. Your master password is never sent to servers. If you forget your password, data recovery is impossible. Users are responsible for safeguarding their data and can delete local or cloud data at any time. The developer is not responsible for data loss.",
+  },
+  {
+    icon: "balance",
+    title: "3. Intellectual Property",
+    text: "All rights to code, logos, brand, and interface elements belong to the developer (Abba Saifer). Decompilation, copying, or use without permission is prohibited.",
+  },
+  {
+    icon: "verified",
+    title: "4. Chrome Permissions",
+    text: "The 'debugger' permission is only used for PDF creation, 'tabs' is for managing bookmarks and opening links in Incognito mode. They are not used for tracking.",
+  },
+  {
+    icon: "warning",
+    title: "5. Changes to Terms",
+    text: "I reserve the right to change these terms at any time. Continued use of the extension after changes indicates your acceptance of the new terms. The latest version is always displayed on this page.",
+  },
+];
+---
+
+<MainGridLayout title={title} description="Terms of Service for Locker extension">
+  <div class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      <div class="max-w-4xl mx-auto px-6 pt-8 pb-20">
+        <!-- Header -->
+        <header class="mb-16">
+          <div class="text-sm font-medium text-(--primary) mb-4">
+            {updated}
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-black mb-6 tracking-tight text-neutral-900 dark:text-neutral-100">
+            {title}
+          </h1>
+          <p class="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
+            {intro}
+          </p>
+        </header>
+
+        <!-- Divider -->
+        <div class="w-full h-px bg-(--line-divider) mb-20" />
+
+        <!-- Sections -->
+        <div class="grid grid-cols-1 gap-12">
+          {
+            sections.map((section, idx) => (
+              <section
+                class="flex flex-col sm:flex-row gap-6 opacity-0 animate-fade-in-up"
+                style={`animation-delay: ${idx * 100}ms; animation-fill-mode: forwards;`}
+              >
+                <div class="shrink-0">
+                  <div class="w-12 h-12 bg-(--btn-regular-bg) text-(--primary) rounded-2xl flex items-center justify-center border border-(--line-divider)">
+                    <Icon name={`material-symbols:${section.icon}`} class="text-[1.5rem]" />
+                  </div>
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-neutral-100">
+                    {section.title}
+                  </h2>
+                  <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {section.text}
+                  </p>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+
+        <!-- Contact Card -->
+        <div class="mt-24 p-8 rounded-[2rem] bg-(--card-bg) border border-(--line-divider) text-center">
+          <p class="text-neutral-600 dark:text-neutral-400">
+            {contactText}
+            <a href={`mailto:${contactEmail}`} class="text-(--primary) font-bold hover:underline">
+              {contactEmail}
+            </a>
+          </p>
+        </div>
+
+        <!-- Footer with back link -->
+        <footer class="mt-16 pt-8 border-t border-(--line-divider)">
+          <a href="/projects/locker" class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-(--primary) transition-colors font-medium">
+            {backText}
+          </a>
+        </footer>
+      </div>
+    </div>
+  </div>
+</MainGridLayout>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>
