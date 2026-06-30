@@ -1,10 +1,8 @@
 ---
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import ReviewsCarousel from "@/components/pages/locker/ReviewsCarousel.astro";
-import lockerHero from "@/assets/images/projects/lockerhero.png";
 
-const CHROME_URL =
-  "https://chromewebstore.google.com/detail/your-extension-id";
+import lockerHero from "@/assets/images/projects/lockerhero.png";
 
 const mainFeatures = [
   {
@@ -34,27 +32,31 @@ const extraFeatures = [
   "Tab Groups",
   "Reading List"
 ];
+
+// Base URL for Chrome Web Store (without partner code)
+const BASE_CHROME_URL =
+  "https://chromewebstore.google.com/detail/fagjclghcmnfinjdkdnkejodfjgkpljd?utm_source=personal_website";
 ---
 <script>
   // Captures `?aff=<id>` on first visit, remembers it, and stamps that id
   // onto every Chrome Web Store CTA on the page — on this visit and later
   // ones. Astro scripts run once on the client after the static HTML has
   // parsed, so this needs no framework hook.
-  const STORAGE_KEY = 'locker-partner-id'
+  const STORAGE_KEY = 'locker-partner-id';
 
-  const incomingAff = new URLSearchParams(window.location.search).get('aff')
+  const incomingAff = new URLSearchParams(window.location.search).get('aff');
   if (incomingAff) {
-    localStorage.setItem(STORAGE_KEY, incomingAff)
+    localStorage.setItem(STORAGE_KEY, incomingAff);
   }
 
-  const partnerId = localStorage.getItem(STORAGE_KEY)
+  const partnerId = localStorage.getItem(STORAGE_KEY);
   if (partnerId) {
     document.querySelectorAll('[data-chrome-cta]').forEach((link) => {
-      if (!(link instanceof HTMLAnchorElement)) return
-      const url = new URL(link.href)
-      url.searchParams.set('aff', partnerId)
-      link.href = url.toString()
-    })
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const url = new URL(link.href);
+      url.searchParams.set('aff', partnerId);
+      link.href = url.toString();
+    });
   }
 </script>
 
@@ -92,8 +94,9 @@ const extraFeatures = [
 
           <div class="mt-10 flex justify-center">
             <a
-              href={CHROME_URL}
+              href={BASE_CHROME_URL}
               target="_blank"
+              data-chrome-cta
               class="rounded-2xl bg-(--primary) px-8 py-4 font-bold text-white dark:text-black/70 transition hover:scale-105">
               Install for Chrome
             </a>
@@ -222,8 +225,9 @@ const extraFeatures = [
           </h2>
 
           <a
-            href={CHROME_URL}
+            href={BASE_CHROME_URL}
             target="_blank"
+            data-chrome-cta
             class="inline-flex rounded-2xl bg-(--primary) px-10 py-5 text-xl font-bold text-white dark:text-black/70 transition hover:scale-105">
             Install Locker Free
           </a>
