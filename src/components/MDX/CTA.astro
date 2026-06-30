@@ -1,0 +1,23 @@
+---
+import ButtonLink from '@components/common/ButtonLink.astro';
+
+interface Props {
+	title: string,
+	buttonTitle: string,
+	url: string
+}
+
+const { title, buttonTitle, url } = Astro.props;
+---
+<div class="flex flex-col items-center justify-center text-center">
+  <h3 class="text-4xl font-bold mb-10 text-foreground">
+    {title}
+  </h3>
+  <a
+    href={url}
+    target="_blank"
+    class="flex items-center gap-4 px-12 btn-regular py-6 text-white text-xl rounded-2xl font-bold hover:opacity-90 hover:scale-105 transition-all shadow-xl shadow-accent-brand/20"
+  >
+    {buttonTitle}
+  </a>
+</div>
