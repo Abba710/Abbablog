@@ -1,0 +1,320 @@
+---
+title: "Locker Manifest: Why I Built Locker"
+published: 2026-07-14
+description: "The story behind Locker, the problems I couldn't solve with existing bookmark managers, and the principles that continue to shape the product today."
+image: '../../../assets/images/Pages/building.png'
+tags: ["locker", "philosophy", "extension"]
+category: "building"
+draft: false
+lang: "EN"
+---
+
+import locker_save from './save.mp4'
+import dragDropVideo from './d&d.mp4'
+
+## What Is a Bookmark Manager?
+
+If you spend a lot of time in your browser, sooner or later Chrome's built-in bookmarks stop being enough.
+
+For me, a bookmark manager has long since become more than just a place to save links.
+
+It's essentially my **Notes 2.0**.
+
+This is where I keep projects, articles, movies, documentation, ideas, useful websites, and dozens of other things I come back to regularly.
+
+A good bookmark manager only needs to do **two things**:
+
+- Help you save information quickly.
+- Help you find it again a week, a month, or even a year later.
+
+> Sounds simple.
+>
+> Yet that's exactly where most bookmark managers fail.
+
+---
+
+# Why Most Bookmark Managers Fail
+
+Over the last few years, I've tried dozens of bookmark managers.
+
+Some were incredibly powerful.
+
+Some looked beautiful.
+
+Some were extremely popular.
+
+Yet almost all of them had one thing in common.
+
+> They weren't enjoyable to use every day.
+
+Here are the most common problems I noticed.
+
+### They're Too Complicated
+
+This is usually a problem with the market leaders.
+
+Adding a simple bookmark often means opening a form, manually entering the URL, editing the title, choosing a folder, and finally saving it.
+
+To this day, I still don't understand why some bookmark managers won't accept `google.com`.
+
+Instead, you have to type the full address like `https://google.com`, otherwise the bookmark simply won't be saved.
+
+> When saving a bookmark turns into a mini quest, something has gone wrong.
+
+---
+
+### They're Packed With Features
+
+Some bookmark managers feel like a Swiss Army knife.
+
+They have everything.
+
+Except simplicity.
+
+Developers keep adding more and more features without asking one simple question.
+
+> **Does this actually make managing bookmarks easier?**
+
+Too often, the answer is **no**.
+
+---
+
+### They're Missing the Features That Actually Matter
+
+Then there's the opposite extreme.
+
+Minimal bookmark managers look clean but barely do anything useful.
+
+- No proper folder organization.
+- No sidebar.
+- No search.
+- No session management.
+
+At that point, they're no longer bookmark managers.
+
+> They're just lists of links.
+
+---
+
+### Poor UX and Mediocre Design
+
+Over the last few years, the market has been flooded with products built during the AI boom.
+
+Many of them look modern in screenshots.
+
+But they're frustrating to use.
+
+- The interface feels cluttered.
+- The workflow isn't intuitive.
+- Simple actions require unnecessary clicks.
+
+For a tool you use every day, that's a serious problem.
+
+---
+
+### No Privacy
+
+For me, this deserves its own section.
+
+Most bookmark managers are closed source.
+
+You don't know what happens to your data.
+
+- Is there analytics?
+- Are your bookmarks being sent to a server?
+- Can you actually trust the developer?
+
+And surprisingly, many bookmark managers still don't work in **Incognito Mode**.
+
+---
+
+### No Session Management
+
+Today, bookmark management is about much more than bookmarks.
+
+We constantly:
+
+- Work with dozens of open tabs.
+- Save research.
+- Switch between projects.
+
+Being able to save and restore an entire browsing session should already be a standard feature.
+
+Yet many products either don't offer it at all or implement it poorly.
+
+---
+
+# Why Does This Happen?
+
+Over time, I came to a fairly simple conclusion.
+
+I believe many developers don't actually use their own products every day.
+
+Otherwise, it's difficult to explain design decisions that constantly create unnecessary work for users.
+
+I'm the complete opposite.
+
+I like organization.
+
+I like knowing exactly where everything is.
+
+When my bookmark collection grows into the hundreds, I want to find what I'm looking for in seconds.
+
+Most importantly...
+
+> Organizing bookmarks shouldn't feel like work.
+>
+> A tool should save you time, **not take it away.**
+
+That's exactly what I couldn't find.
+
+---
+
+# Why I Built Locker
+
+It all started with one simple problem.
+
+I needed a bookmark manager that fully supported **Incognito Mode**.
+
+As it turned out, finding one was nearly impossible.
+
+So I built it myself.
+
+At first, Locker solved only my own problem.
+
+But the more I used it every day, the more ideas I had for improving it.
+
+- New features appeared.
+- The interface evolved.
+- The UX improved.
+
+I kept adding things I personally needed.
+
+Eventually, I realized something important.
+
+> I don't want to build the bookmark manager with the longest feature list.
+>
+> I want to build a bookmark manager that's genuinely enjoyable to use every single day.
+
+That's how the principle behind Locker was born.
+
+---
+
+# The SSEP Principle
+
+When building Locker, I follow four simple principles.
+
+> **SSEP**
+>
+> **Simple. Smart. Elegant. Private.**
+
+Almost every decision I make during development goes through these four questions.
+
+---
+
+## Simple
+
+Every action should be as fast as possible.
+
+- **Save a bookmark?** One click.
+- **Create a folder?** One click.
+- **Import Chrome bookmarks?** One click.
+
+I try to remove everything unnecessary between the user and the result.
+
+<video width="100%" autoplay loop muted control="1" playsinline>
+  <source src={locker_save} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+---
+
+## Smart
+
+Simple shouldn't mean limited.
+
+That's why I try to make Locker smart without making it more complicated.
+
+For example, the Drag & Drop system supports virtually unlimited folder nesting while remaining intuitive to use.
+
+<video width="100%" autoplay loop muted control="1" playsinline>
+  <source src={dragDropVideo} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+Another example is **AI Summary**.
+
+Instead of building my own mediocre AI or charging extra for AI features, Locker simply opens ChatGPT with the page already prepared as context.
+
+The workflow is simple.
+
+1. Open a page.
+2. Click **AI Summary**.
+3. ChatGPT opens with the page already prepared as context.
+
+It's fast.
+
+It's simple.
+
+And it works with the AI tools you already use.
+
+---
+
+## Elegant
+
+I've always believed that a great interface should almost disappear.
+
+It shouldn't distract you.
+
+It shouldn't get in your way.
+
+It shouldn't make you think.
+
+That's why I spend so much time refining Locker's UX.
+
+That means:
+
+- A custom context menu.
+- A bottom control panel.
+- A dedicated settings page.
+- Minimal visual noise.
+- Maximum attention to detail.
+
+---
+
+## Private
+
+This is probably the principle that defines Locker the most.
+
+- No trackers.
+- Encrypted bookmarks.
+- Open source.
+- Full Incognito Mode support.
+- Password protection every browser session.
+
+To me,
+
+> **Privacy isn't just another feature.**
+>
+> **It's the foundation of the product.**
+
+---
+
+# That's Why Locker Is the Only Bookmark Manager I Personally Need
+
+I didn't build Locker to create yet another bookmark manager.
+
+I built it because I couldn't find one that I genuinely wanted to use every day.
+
+Today, every new feature starts with four simple questions.
+
+- Is it **simpler**?
+- Is it **smarter**?
+- Is it **more elegant**?
+- Is it **more private**?
+
+If the answer to even one of those questions is **no**, that feature probably doesn't belong in Locker.
+
+That's why I use Locker every single day.
+
+And that's why I continue building it.

@@ -26,15 +26,32 @@ const useCases = [
     { label: "Documentation", emoji: "📄" },
 ];
 
-const extensionReplacements = [
-    "Bookmark Manager",
-    "Bookmark Sidebar",
-    "Bookmark Organizer",
-    "Session Manager",
-    "Restore Tabs",
-    "Private Bookmarks",
-    "Cloud Sync",
-    "Password Protection",
+// Features grouped by philosophy
+const featureGroups = {
+    simple: {
+        label: "Simple",
+        items: ["One-click save", "One-click folders", "Chrome Import"],
+    },
+    smart: {
+        label: "Smart",
+        items: ["AI Summary", "Unlimited Drag & Drop", "Session Saving"],
+    },
+    elegant: {
+        label: "Elegant",
+        items: ["Sidebar", "Bottom Control Panel", "Custom Context Menu"],
+    },
+    private: {
+        label: "Private",
+        items: ["Encryption", "Password Protection", "Incognito Support", "Open Source"],
+    },
+};
+
+const privacyFeatures = [
+    "Open Source",
+    "AES-GCM Encrypted",
+    "No Trackers",
+    "Incognito Support",
+    "Password Protected",
 ];
 
 const customizationFeatures = [
@@ -138,49 +155,97 @@ const customizationFeatures = [
         </section>
 
         <!-- ============================================================ -->
-        <!-- SECTION 2: Everything in one beautiful sidebar               -->
+        <!-- NEW: WHY LOCKER EXISTS                                        -->
         <!-- ============================================================ -->
-        <section class="mb-32">
+        <section class="mb-32 rounded-[40px] border border-(--line-divider) bg-(--card-bg) p-10 md:p-16 shadow-lg relative overflow-hidden">
 
-            <div class="mb-12 text-center">
-                <h2 class="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                    Everything in one{" "}
-                    <span class="text-(--primary)">beautiful sidebar</span>
-                </h2>
-                <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                    One extension replaces five. All the tools you need, organized
-                    exactly how you want.
-                </p>
-            </div>
+            <!-- Subtle decorative blur -->
+            <div class="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-(--primary)/10 blur-[140px]"></div>
+            <div class="absolute -left-32 -bottom-32 h-80 w-80 rounded-full bg-(--primary)/5 blur-[140px]"></div>
 
-            <!-- Large Screenshot #1 -->
-            <div class="overflow-hidden rounded-3xl border border-(--line-divider) bg-(--card-bg) shadow-xl">
-                <img
-                src={lockerScreenshot1.src}
-                alt="Locker sidebar showing bookmarks, folders, collections, and session manager"
-                class="w-full object-cover"
-                />
-            </div>
+            <div class="relative z-10 max-w-3xl mx-auto text-center">
 
-            <!-- Feature grid under screenshot -->
-            <div class="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {[
-                "Bookmark Manager",
-                "Bookmark Sidebar",
-                "Bookmark Search",
-                "Folders",
-                "Collections",
-                "Session Manager",
-                "Restore Tabs",
-                "Private Bookmarks",
-                "Incognito",
-                "Cloud Sync",
-                ].map((feature) => (
-                    <span
-                    class="rounded-full border border-(--line-divider) bg-(--btn-regular-bg) px-4 py-2 text-center text-sm text-(--btn-content)"
-                >
-                    {feature}
+                <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--primary)/70 mb-4">
+                    Why Locker Exists
                 </span>
+
+                <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100 leading-tight">
+                    Built because existing bookmark managers {' '}
+                    <span class="text-(--primary)">never felt right.</span>
+                </h2>
+
+                <div class="mt-6 space-y-4 text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+                    <p>
+                        Locker started from a simple frustration: every bookmark manager I tried
+                        felt either too cluttered, too limited, or just not built for how I actually work.
+                    </p>
+                    <p>
+                      So I built one that is <strong class="text-neutral-900 dark:text-neutral-100">simple</strong>,{' '}
+                        <strong class="text-neutral-900 dark:text-neutral-100">smart</strong>,{' '}
+                        <strong class="text-neutral-900 dark:text-neutral-100">elegant</strong>, and{' '}
+                        <strong class="text-neutral-900 dark:text-neutral-100">private</strong>.
+                        Every feature passes through these four principles — if it doesn't make the
+                        product simpler, smarter, more elegant, or more private, it doesn't go in.
+                    </p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-500 italic">
+                        The full story behind why Locker exists.
+                    </p>
+                </div>
+
+                <div class="mt-8">
+                    <a
+                    href="/posts/why-locker/"
+                    class="inline-flex items-center gap-2 rounded-full border border-(--primary)/30 bg-(--primary)/5 px-6 py-3 text-sm font-medium text-(--primary) transition hover:bg-(--primary)/10 hover:border-(--primary)/50"
+                >
+                    Read the Manifest
+                    <span class="text-base">→</span>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: Features grouped by philosophy                     -->
+    <!-- ============================================================ -->
+    <section class="mb-32">
+
+        <div class="mb-12 text-center">
+            <h2 class="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                Built around <span class="text-(--primary)">four principles</span>
+            </h2>
+            <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Every feature exists because it makes Locker simpler, smarter,
+                more elegant, or more private.
+            </p>
+        </div>
+
+        <!-- Large Screenshot #1 -->
+        <div class="overflow-hidden rounded-3xl border border-(--line-divider) bg-(--card-bg) shadow-xl">
+            <img
+            src={lockerScreenshot1.src}
+            alt="Locker sidebar showing bookmarks, folders, collections, and session manager"
+            class="w-full object-cover"
+            />
+        </div>
+
+        <!-- Feature grid grouped by philosophy -->
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {Object.entries(featureGroups).map(([key, group]) => (
+                <div class="rounded-2xl border border-(--line-divider) bg-(--card-bg) p-5 shadow-sm">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-(--primary) mb-3">
+                        {group.label}
+                    </h3>
+                    <ul class="space-y-2">
+                        {group.items.map((item) => (
+                            <li class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                <span class="text-(--primary)">—</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             ))}
         </div>
 
@@ -206,7 +271,16 @@ const customizationFeatures = [
                     in a single, seamless application.
                 </p>
                 <div class="mt-6 flex flex-wrap gap-2">
-                    {extensionReplacements.map((item) => (
+                    {[
+                        "Bookmark Manager",
+                        "Bookmark Sidebar",
+                        "Bookmark Organizer",
+                        "Session Manager",
+                        "Restore Tabs",
+                        "Private Bookmarks",
+                        "Cloud Sync",
+                        "Password Protection",
+                    ].map((item) => (
                         <span class="rounded-full border border-(--line-divider) bg-(--btn-regular-bg) px-4 py-1.5 text-sm text-(--btn-content)">
                             {item}
                         </span>
@@ -304,31 +378,28 @@ const customizationFeatures = [
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 6: Security – "Your bookmarks stay yours."           -->
+<!-- SECTION 6: Privacy – "Your bookmarks stay yours."            -->
 <!-- ============================================================ -->
 <section class="relative mb-32 overflow-hidden rounded-[40px] border border-(--line-divider) bg-(--card-bg) p-12 md:p-16 shadow-lg">
 
     <div class="relative z-10 max-w-2xl">
+
+        <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--primary)/70 mb-3">
+            Privacy
+        </span>
 
         <h2 class="mb-4 text-4xl font-bold text-neutral-900 dark:text-neutral-100">
             Your bookmarks <span class="text-(--primary)">stay yours</span>.
         </h2>
 
         <p class="mb-8 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
-            AES-GCM encryption. Zero-knowledge architecture.
-            Password protection. Encrypted cloud sync.
-            Full Incognito support. Local-first design.
+            Open source. Encrypted. No trackers. Incognito support.
+            Password protected. Everything we build is designed
+            to keep your data private — by default.
         </p>
 
         <div class="grid gap-3 sm:grid-cols-2">
-            {[
-            "AES-GCM encryption",
-            "Zero Knowledge",
-            "Password protection",
-            "Encrypted Cloud Sync",
-            "Full Incognito support",
-            "Local-first architecture",
-            ].map((item) => (
+            {privacyFeatures.map((item) => (
                 <div class="flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
                     <span class="text-(--primary) text-lg">✓</span>
                     <span class="text-sm">{item}</span>
@@ -378,13 +449,17 @@ const customizationFeatures = [
 <!-- ============================================================ -->
 <!-- FOOTER                                                        -->
 <!-- ============================================================ -->
-<footer class="flex justify-center gap-8 border-t border-(--line-divider) pt-8 text-sm text-neutral-600 dark:text-neutral-400">
+<footer class="flex flex-wrap justify-center gap-6 border-t border-(--line-divider) pt-8 text-sm text-neutral-600 dark:text-neutral-400">
 
-    <a href="/projects/locker/privacy/" class="hover:text-(--primary)">
+    <a href="/posts/why-locker/" class="hover:text-(--primary) transition">
+        Read the Manifest
+    </a>
+
+    <a href="/projects/locker/privacy/" class="hover:text-(--primary) transition">
         Privacy Policy
     </a>
 
-    <a href="/projects/locker/terms/" class="hover:text-(--primary)">
+    <a href="/projects/locker/terms/" class="hover:text-(--primary) transition">
         Terms of Service
     </a>
 
