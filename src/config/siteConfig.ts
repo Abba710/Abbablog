@@ -119,7 +119,7 @@ export const siteConfig: SiteConfig = {
     friends: false,
 
     // Sponsor page
-    sponsor: false,
+    sponsor: true,
 
     // Guestbook page
     guestbook: true,

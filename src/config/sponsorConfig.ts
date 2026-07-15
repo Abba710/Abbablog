@@ -1,79 +1,55 @@
 import type { SponsorConfig } from "../types/sponsorConfig";
+import qrCode from "@/assets/images/qr-code.png"
 
 export const sponsorConfig: SponsorConfig = {
-	// 页面标题，如果留空则使用 i18n 中的翻译
-	title: "",
+	// Page title, leave empty to use translation from i18n
+	title: "Support Me",
 
-	// 页面描述文本，如果留空则使用 i18n 中的翻译
-	description: "",
+	// Page description text, leave empty to use translation from i18n
+	description: "If my content has been helpful to you, welcome to sponsor me through the following methods. Your support is the driving force for my continued creation!",
 
-	// 打赏用途说明
+	// Description of how sponsorship funds will be used
 	usage:
-		"您的打赏将用于服务器维护、内容创作和功能开发，帮助我持续提供优质内容。",
+		"Your donations will be used for server maintenance, content creation, and feature development, helping me to continuously provide high-quality content.",
 
-	// 是否显示打赏者列表
+	// Whether to show the list of sponsors
 	showSponsorsList: true,
 
-	// 是否显示评论区，需要先在commentConfig.ts启用评论系统
+	// Whether to show the comment section (must enable comment system in commentConfig.ts first)
 	showComment: true,
 
-	// 是否在文章详情页底部显示打赏按钮
+	// Whether to show the sponsor button at the bottom of article detail pages
 	showButtonInPost: true,
 
-	// 打赏方式列表
+	// List of sponsorship methods
 	methods: [
 		{
-			name: "支付宝",
-			icon: "fa7-brands:alipay",
-			// 收款码图片路径（需要放在 public 目录下）
-			qrCode: "/assets/images/sponsor/alipay.png",
-			link: "",
-			description: "使用 支付宝 扫码打赏",
-			enabled: true,
-		},
-		{
-			name: "微信",
-			icon: "fa7-brands:weixin",
-			qrCode: "/assets/images/sponsor/wechat.png",
-			link: "",
-			description: "使用 微信 扫码打赏",
-			enabled: true,
-		},
-		{
-			name: "ko-fi",
-			icon: "simple-icons:kofi",
-			qrCode: "",
-			link: "https://ko-fi.com/cuteleaf",
-			description: "Buy a Coffee for Firefly",
-			enabled: true,
-		},
-		{
-			name: "爱发电",
-			icon: "simple-icons:afdian",
-			qrCode: "",
-			link: "https://ifdian.net/a/cuteleaf",
-			description: "通过 爱发电 进行打赏",
+			name: "buymeacoffee",
+			// icon: "simple-icons:kofi",
+			qrCode: `${qrCode.src}`,
+			link: "buymeacoffee.com/Abba710",
+			description: "Buy a Coffee for Abba",
 			enabled: true,
 		},
 	],
 
-	// 打赏者列表（可选）
+	// List of sponsors (optional)
 	sponsors: [
-		// 示例：已实名打赏者
+		// Example: verified sponsor
 		{
-			name: "夏叶",
+			name: "Shivam Dalmia",
 			avatar:
-				"https://weavatar.com/avatar/d252655d40d6874417a720bad0a6c5f77f8f6a1fd2f882f8f338402dc37e4190?s=640",
-			amount: "¥50",
-			date: "2025-10-01",
+				"https://cdn.buymeacoffee.com/uploads/profile_pictures/default/v2/EFC16D/SD.png",
+			amount: "$5.00",
+			date: "2025-12-01",
 		},
 
-		// 示例：匿名打赏者
+		// Example: anonymous sponsor
 		{
-			name: "匿名用户",
-			// avatar: "",
-			amount: "¥20",
-			date: "2025-10-01",
+			name: "Someone",
+			avatar: "https://cdn.buymeacoffee.com/uploads/profile_pictures/default/v2/80BEAF/SO.png",
+			amount: "$5.00",
+			date: "2025-12-07",
 		},
 	],
 };
