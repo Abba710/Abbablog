@@ -1,5 +1,5 @@
 import type { SponsorConfig } from "../types/sponsorConfig";
-import qrCode from "@/assets/images/qr-code.png"
+import qrCode from "../assets/images/qr_code.png"
 
 export const sponsorConfig: SponsorConfig = {
 	// Page title, leave empty to use translation from i18n

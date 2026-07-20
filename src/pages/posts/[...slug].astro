@@ -144,7 +144,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
 >
   <!-- KaTeX 按需加载 - 仅在文章页面 -->
   <KatexManager slot="head" />
-  
+
   <script
     is:inline
     slot="head"
@@ -352,7 +352,55 @@ const relatedPosts = await getRelatedPosts(entry, 5);
             <Content />
           </Markdown>
 
-          {/* 打赏按钮 & 分享按钮 */}
+          {/* Locker action panel */}
+          {
+            <div class="mb-6 rounded-xl onload-animation">
+              <div class="p-6 bg-(--license-block-bg) rounded-xl">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  {/* Left side - icon & text */}
+                  <div class="flex items-center gap-3 flex-1">
+                    <div class="h-12 w-12 rounded-lg bg-(--primary) flex items-center justify-center text-white dark:text-black/70 shrink-0">
+                      <Icon
+                        is:inline
+                        name="material-symbols:lock-outline"
+                        class="text-2xl"
+                      />
+                    </div>
+                    <div>
+                      <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
+                        Locker — Bookmark Manager
+                      </h3>
+                      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                        Organize, search, and sync your bookmarks with ease
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right side - action buttons */}
+                  <div class="flex items-center gap-3">
+                    {/* Visit Locker page button */}
+                    <a
+                      href="/projects/locker/"
+                      class="btn-regular rounded-lg h-12 px-6 gap-2 hover:scale-105 active:scale-95"
+                    >
+                      <Icon is:inline name="material-symbols:open-in-new" class="text-sm" />
+                      <span>Visit page</span>
+                    </a>
+
+                    {/* Get Locker button */}
+                    <a
+                      target="_blank"
+                      href={`https://chromewebstore.google.com/detail/locker-bookmark-manager-s/fagjclghcmnfinjdkdnkejodfjgkpljd?utm_source=${entry.data.title}&hl=en`}
+                      class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
+                    >
+                      <span>Get Locker</span>
+                      <Icon is:inline name="fa7-solid:arrow-right" class="text-sm" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
           {
             (siteConfig.post.sharePoster || (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
               <div class="mb-6 rounded-xl onload-animation">
@@ -447,10 +495,10 @@ const relatedPosts = await getRelatedPosts(entry, 5);
 
       // 1. 預設加上 hidden 隱藏，並把時間與閾值綁在 data-* 屬性
       return (
-        <div 
-          id="outdated-card" 
-          class="card-base p-6 mb-4 hidden" 
-          data-date={lastModified.toISOString()} 
+        <div
+          id="outdated-card"
+          class="card-base p-6 mb-4 hidden"
+          data-date={lastModified.toISOString()}
           data-threshold={outdatedThreshold}
         >
           <div class="flex items-center gap-2">
@@ -480,7 +528,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
     import dayjs from "dayjs";
 
     const card = document.getElementById('outdated-card');
-    
+
     if (card) {
       // 讀取伺服器給的日期，並用 dayjs 直接算出差異天數
       const lastModified = dayjs(card.dataset.date);
@@ -496,7 +544,7 @@ const relatedPosts = await getRelatedPosts(entry, 5);
           if (textEl && textEl.dataset.template) {
             textEl.textContent = `，${textEl.dataset.template.replace("{days}", daysDiff.toString())}`;
           }
-          
+
           const warningEl = document.getElementById('outdated-warning');
           if (warningEl) {
             warningEl.classList.remove('hidden');
