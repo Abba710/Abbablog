@@ -1,6 +1,4 @@
 import type { SponsorConfig } from "../types/sponsorConfig";
-import qrCode from "../assets/images/qr_code.png"
-
 export const sponsorConfig: SponsorConfig = {
 	// Page title, leave empty to use translation from i18n
 	title: "Support Me",
@@ -26,7 +24,7 @@ export const sponsorConfig: SponsorConfig = {
 		{
 			name: "buymeacoffee",
 			// icon: "simple-icons:kofi",
-			qrCode: `${qrCode.src}`,
+			qrCode: `/assets/images/qr_code.png`,
 			link: "buymeacoffee.com/Abba710",
 			description: "Buy a Coffee for Abba",
 			enabled: true,
