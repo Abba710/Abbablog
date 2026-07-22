@@ -299,15 +299,25 @@ const customizationFeatures = [
                             {["📁", "📋", "🔄", "🔒", "☁️"][i - 1]}
                         </div>
                     ))}
+
                 </div>
                 <span class="text-3xl font-bold text-(--primary)">→</span>
                 <div class="h-16 w-16 rounded-2xl border-2 border-(--line-divider) bg-(--card-bg) flex items-center justify-center text-3xl shadow-lg">
                   <img src={lockerIcon.src} alt="Bookmark manager" />
                 </div>
+
             </div>
             <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
                 5 extensions → 1 integrated experience
             </p>
+            <a
+            target="_blank"
+            href="/posts/locker-show-case/"
+            class="mt-5 inline-flex items-center gap-2 rounded-full border border-(--primary)/30 bg-(--primary)/5 px-6 py-3 text-sm font-medium text-(--primary) transition hover:bg-(--primary)/10 hover:border-(--primary)/50"
+        >
+            See showcase
+            <span class="text-base">→</span>
+        </a>
         </div>
 
     </div>
@@ -451,7 +461,7 @@ const customizationFeatures = [
 <!-- ============================================================ -->
 <footer class="flex flex-wrap justify-center gap-6 border-t border-(--line-divider) pt-8 text-sm text-neutral-600 dark:text-neutral-400">
 
-    <a href="/posts/why-locker/" class="hover:text-(--primary) transition">
+    <a href="/posts/why-locker/" target="_blank" class="hover:text-(--primary) transition">
         Read the Manifest
     </a>
 
