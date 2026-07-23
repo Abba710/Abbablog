@@ -30,6 +30,7 @@ import { sponsorConfig } from "@/config/sponsorConfig";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { getApiUrlList, processCoverImageSync } from "@/utils/image-utils";
 import { url } from "@/utils/url-utils";
+import VideoManager from "@components/MDX/VideoManager.astro";
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
@@ -348,9 +349,10 @@ const relatedPosts = await getRelatedPosts(entry, 5);
         </EncryptedPost>
       ) : (
         <>
-          <Markdown class="mb-6 markdown-content onload-animation">
+          <Markdown class="mb-6 markdown-content onload-animation article">
             <Content />
           </Markdown>
+          <VideoManager />
 
           {/* Locker action panel */}
           {
